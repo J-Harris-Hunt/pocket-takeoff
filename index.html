@@ -45,8 +45,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 .brand h1{font:700 26px/1 var(--font-display);letter-spacing:.06em;text-transform:uppercase}
 .pill{font:600 12px/1.2 var(--font-body);letter-spacing:.04em;color:var(--notice-ink);background:var(--notice-bg);border:1px solid var(--notice-line);border-radius:4px;padding:4px 8px}
 .ticks{height:7px;margin-top:8px;background:repeating-linear-gradient(90deg,var(--muted) 0 1px,transparent 1px 48px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 8px) bottom/100% 4px no-repeat}
-.tabs{display:flex}
-.tab{flex:1;min-height:48px;background:none;border:0;border-bottom:4px solid transparent;color:var(--muted);font:600 17px/1 var(--font-display);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.tabs{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1 0 auto;padding:0 10px;white-space:nowrap;min-height:48px;background:none;border:0;border-bottom:4px solid transparent;color:var(--muted);font:600 17px/1 var(--font-display);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
 .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
 
 /* layout */
@@ -157,7 +158,40 @@ details.guide ul{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:c
 .err{color:var(--bad);font-size:14px;font-weight:500}
 @media (min-width:560px){.conv{grid-template-columns:repeat(4,1fr)}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* resources */
+.tab{font-size:15px;letter-spacing:.06em}
+@media (min-width:560px){.tab{font-size:17px;letter-spacing:.08em}}
+.jump{display:flex;flex-wrap:wrap;gap:8px}
+.jump a{font:600 14px var(--font-body);border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;text-decoration:none;color:var(--ink);background:var(--surface-2)}
+.warnbox{border:2px solid var(--bad);border-radius:6px;padding:12px 14px;background:var(--surface);font-size:15px}
+.warnbox strong{display:block;color:var(--bad);font:700 17px var(--font-display);letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+.calc-disp{width:100%;font:500 26px/1.2 var(--font-data);text-align:right;background:var(--readout-bg);color:var(--readout-fg);border:0;border-radius:6px;padding:12px 14px;min-height:56px}
+.calc-sub{font:500 14px var(--font-data);color:var(--muted);text-align:right;min-height:20px;overflow-wrap:anywhere}
+.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+.keys button{min-height:52px;font:600 20px var(--font-data);border:1.5px solid var(--line);border-radius:6px;background:var(--surface-2);color:var(--ink);cursor:pointer}
+.keys button.op{background:var(--accent-soft);border-color:var(--accent)}
+.keys button.eq{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.steps li{border:1px solid var(--line);border-left:4px solid var(--line);border-radius:5px;padding:10px 12px;background:var(--surface-2)}
+.steps li.ok{border-left-color:var(--ok)} .steps li.bad{border-left-color:var(--bad)}
+.steps .h{font-weight:700}
+.steps code{display:block;white-space:pre-wrap;font:500 13.5px/1.5 var(--font-data);overflow-wrap:anywhere;margin-top:3px}
+.steps .r{font:600 14px/1.5 var(--font-data);margin-top:3px;overflow-wrap:anywhere}
+.steps .n{font-size:13.5px;color:var(--muted);margin-top:3px}
+.tag{display:inline-block;font:700 12px var(--font-body);letter-spacing:.06em;text-transform:uppercase;border-radius:4px;padding:2px 6px;margin-left:6px;vertical-align:1px}
+.tag.ok{background:var(--ok);color:#fff} .tag.bad{background:var(--bad);color:#fff}
+.verdict{border-radius:6px;padding:12px 14px;font-weight:600}
+.verdict.ok{background:color-mix(in srgb,var(--ok) 15%,var(--surface));border:1.5px solid var(--ok)}
+.verdict.bad{background:color-mix(in srgb,var(--bad) 15%,var(--surface));border:1.5px solid var(--bad)}
+details.guide ol{margin:10px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:7px;font-size:15px}
+details.guide p{font-size:15px;margin:8px 0 0}
+details.guide+details.guide{margin-top:10px}
+.cres{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (min-width:560px){.cres{grid-template-columns:repeat(4,1fr)}}
 </style>
+
+<meta name="theme-color" content="#0a6a85">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -165,7 +199,8 @@ details.guide ul{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:c
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Pocket Takeoff">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="description" content="Pocket Takeoff: carpet, countertop and flooring estimates. Independent app, not affiliated with The Home Depot.">
+<meta name="description" content="Pocket Takeoff: carpet, countertop, flooring and drywall estimates, plus construction calculators. Independent app, not affiliated with The Home Depot.">
+<style>#gate-title:focus,#modal-title:focus{outline:none}</style>
 </head><body>
 
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
@@ -197,6 +232,8 @@ details.guide ul{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:c
         <button class="tab" role="tab" id="t-carpet" aria-controls="tab-carpet" aria-selected="true">Carpet</button>
         <button class="tab" role="tab" id="t-counter" aria-controls="tab-counter" aria-selected="false">Counters</button>
         <button class="tab" role="tab" id="t-floor" aria-controls="tab-floor" aria-selected="false">Flooring</button>
+        <button class="tab" role="tab" id="t-drywall" aria-controls="tab-drywall" aria-selected="false">Drywall</button>
+        <button class="tab" role="tab" id="t-res" aria-controls="tab-res" aria-selected="false">Resources</button>
       </nav>
     </div>
   </header>
@@ -425,6 +462,418 @@ details.guide ul{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:c
 
     <div class="panel vz" id="vz-floor"></div>
   </section>
+
+  <!-- ============ DRYWALL ============ -->
+  <section id="tab-drywall" class="tool" role="tabpanel" aria-labelledby="t-drywall" hidden>
+    <div class="panel">
+      <h2 class="sec">Sheets</h2>
+      <div class="row">
+        <div><label for="d-size">Sheet size</label>
+          <select id="d-size" data-bind="drywall.size">
+            <option value="4x8">4 ft × 8 ft (32 sq ft)</option><option value="4x9">4 ft × 9 ft (36 sq ft)</option>
+            <option value="4x10">4 ft × 10 ft (40 sq ft)</option><option value="4x12">4 ft × 12 ft (48 sq ft)</option>
+            <option value="54x12">54 in × 12 ft (54 sq ft)</option>
+          </select></div>
+        <div><label for="d-thick">Thickness</label>
+          <select id="d-thick" data-bind="drywall.thick">
+            <option value="1/4">1/4 in (curves, overlays)</option><option value="3/8">3/8 in (overlays, repairs)</option>
+            <option value="1/2">1/2 in (standard walls)</option><option value="5/8">5/8 in (ceilings, fire-rated)</option>
+          </select></div>
+      </div>
+      <div class="row">
+        <div><label for="d-type">Type</label>
+          <select id="d-type" data-bind="drywall.type">
+            <option value="regular">Regular</option><option value="light">Lightweight</option>
+            <option value="mr">Moisture and mold resistant</option><option value="x">Fire-rated (Type X)</option>
+            <option value="abuse">Abuse or impact resistant</option>
+          </select></div>
+        <div><label for="d-waste">Waste, %</label><input type="text" id="d-waste" class="num" inputmode="decimal" data-bind="drywall.waste"></div>
+      </div>
+      <p class="help">Longer sheets mean fewer butt joints to finish. 54 in sheets cover a 9 ft wall in two rows. Typical waste is 10 to 15%, more for rooms with many corners and openings.</p>
+    </div>
+
+    <div class="panel">
+      <h2 class="sec">Walls</h2>
+      <p class="help">Enter each wall, or one wall with a count for matching walls. Use feet, inches, or both.</p>
+      <div id="d-walls"></div>
+      <div class="btns"><button type="button" class="btn quiet" id="d-wadd">Add a wall</button><button type="button" class="btn danger" id="d-reset">Start fresh</button></div>
+    </div>
+
+    <div class="panel">
+      <h2 class="sec">Ceilings</h2>
+      <div id="d-ceils"></div>
+      <div class="btns"><button type="button" class="btn quiet" id="d-cadd">Add a ceiling</button></div>
+    </div>
+
+    <div class="panel">
+      <h2 class="sec">Openings</h2>
+      <label class="chk" for="d-sub"><input type="checkbox" id="d-sub" data-bind="drywall.sub"> Subtract doors and windows</label>
+      <div class="row">
+        <div><label for="d-doors">Doors</label><input type="text" id="d-doors" class="num" inputmode="numeric" data-bind="drywall.doors"></div>
+        <div><label for="d-doorsf">Sq ft per door</label><input type="text" id="d-doorsf" class="num" inputmode="decimal" data-bind="drywall.doorSf"></div>
+        <div><label for="d-wins">Windows</label><input type="text" id="d-wins" class="num" inputmode="numeric" data-bind="drywall.windows"></div>
+        <div><label for="d-winsf">Sq ft per window</label><input type="text" id="d-winsf" class="num" inputmode="decimal" data-bind="drywall.winSf"></div>
+      </div>
+      <div><label for="d-other">Other area to subtract, sq ft</label><input type="text" id="d-other" class="num" inputmode="decimal" data-bind="drywall.other"></div>
+      <p class="help">A standard 3 ft × 6 ft 8 in door is about 20 sq ft. Many installers do not subtract small openings, because the cut-out pieces are rarely usable.</p>
+    </div>
+
+    <div class="panel">
+      <h2 class="sec">Finishing</h2>
+      <div class="row">
+        <div><label for="d-corners">Outside corners</label><input type="text" id="d-corners" class="num" inputmode="numeric" data-bind="drywall.corners"></div>
+        <div><span class="lbl">Corner height</span><div class="dim">
+          <div class="uw"><input type="text" id="d-chft" class="num" inputmode="decimal" aria-label="Corner height feet" data-bind="drywall.cornerFt"><span>ft</span></div>
+          <div class="uw"><input type="text" id="d-chin" class="num" inputmode="decimal" aria-label="Corner height inches" data-bind="drywall.cornerIn"><span>in</span></div></div></div>
+        <div><label for="d-bead">Corner bead length</label><select id="d-bead" data-bind="drywall.bead"><option value="8">8 ft</option><option value="10">10 ft</option></select></div>
+      </div>
+      <div class="row">
+        <div><label for="d-mud">Joint compound, gal per 1,000 sq ft</label><input type="text" id="d-mud" class="num" inputmode="decimal" data-bind="drywall.mudRate"></div>
+        <div><label for="d-mudpkg">Compound package</label><select id="d-mudpkg" data-bind="drywall.mudPkg"><option value="4.5">4.5 gal box or pail</option><option value="3.5">3.5 gal pail</option><option value="1">1 gal pail</option></select></div>
+      </div>
+      <div class="row">
+        <div><label for="d-tape">Paper tape, ft per 1,000 sq ft</label><input type="text" id="d-tape" class="num" inputmode="decimal" data-bind="drywall.tapeRate"></div>
+        <div><label for="d-roll">Tape roll</label><select id="d-roll" data-bind="drywall.tapeRoll"><option value="500">500 ft roll</option><option value="250">250 ft roll</option><option value="75">75 ft roll</option></select></div>
+        <div><label for="d-screw">Screws per sq ft</label><input type="text" id="d-screw" class="num" inputmode="decimal" data-bind="drywall.screwRate"></div>
+      </div>
+      <p class="help">Starting rates: about 370 ft of tape per 1,000 sq ft of board (USG tape data sheets), about two 4.5 gal pails of ready-mixed all-purpose compound per 1,000 sq ft (USG), and about 1 screw per sq ft with framing at 16 in. Change them to match the product label or your crew.</p>
+    </div>
+
+    <div class="panel">
+      <h2 class="sec">Price</h2>
+      <div class="row">
+        <div><label for="d-price">Price per sheet, $</label><input type="text" id="d-price" class="num" inputmode="decimal" data-bind="drywall.price"></div>
+        <div><label for="d-tax">Sales tax, %</label><input type="text" id="d-tax" class="num" inputmode="decimal" data-bind="drywall.tax"></div>
+      </div>
+      <div><label for="d-notes">Notes</label><textarea id="d-notes" data-bind="drywall.notes"></textarea></div>
+    </div>
+
+    <div class="panel">
+      <h2 class="sec">Result</h2>
+      <div class="readout" id="d-ro" aria-live="polite"></div>
+      <div class="btns"><button type="button" class="btn" id="d-pdf">Save as PDF</button><button type="button" class="btn quiet" id="d-copy">Copy summary</button></div>
+      <div class="notice" data-notice></div>
+    </div>
+  </section>
+
+  <!-- ============ RESOURCES ============ -->
+  <section id="tab-res" class="tool" role="tabpanel" aria-labelledby="t-res" hidden>
+    <div class="warnbox" role="note">
+      <strong>Not engineering. Have a professional check every number.</strong>
+      Everything on this page is simplified general information for education only. It is not engineering, design, or professional advice, and it is not a code approval. The math may be wrong or may not fit your situation. Every result must be checked by a licensed engineer, architect, building official, or the product manufacturer before anyone builds, buys, cuts, or loads anything. The creator of this app makes no claim that any of it is accurate and takes no responsibility for it. <button type="button" class="linkbtn" data-open-notice>Read the full notice</button>
+    </div>
+
+    <nav class="jump" aria-label="On this page">
+      <a href="#r-calc">Calculator</a><a href="#r-cons">Construction calculator</a><a href="#r-load">Load calculator</a><a href="#r-terms">Load terms and wood types</a><a href="#r-truss">Trusses</a><a href="#r-guides">How-to guides</a>
+    </nav>
+
+    <!-- standard calculator -->
+    <div class="panel" id="r-calc">
+      <h2 class="sec">Calculator</h2>
+      <label for="k-disp" class="lbl">Type or tap. Uses normal order: × and ÷ before + and −.</label>
+      <input type="text" id="k-disp" class="calc-disp" inputmode="decimal" autocomplete="off" value="">
+      <div class="calc-sub" id="k-sub" aria-live="polite"></div>
+      <div class="keys" id="k-keys">
+        <button type="button" data-k="C">C</button><button type="button" data-k="back" aria-label="Delete">⌫</button><button type="button" data-k="%">%</button><button type="button" class="op" data-k="÷">÷</button>
+        <button type="button" data-k="7">7</button><button type="button" data-k="8">8</button><button type="button" data-k="9">9</button><button type="button" class="op" data-k="×">×</button>
+        <button type="button" data-k="4">4</button><button type="button" data-k="5">5</button><button type="button" data-k="6">6</button><button type="button" class="op" data-k="−">−</button>
+        <button type="button" data-k="1">1</button><button type="button" data-k="2">2</button><button type="button" data-k="3">3</button><button type="button" class="op" data-k="+">+</button>
+        <button type="button" data-k="(">(</button><button type="button" data-k="0">0</button><button type="button" data-k=".">.</button><button type="button" class="eq" data-k="=">=</button>
+      </div>
+      <div class="btns"><button type="button" class="btn quiet small" data-k2=")">Add closing )</button></div>
+    </div>
+
+    <!-- construction calculator -->
+    <div class="panel" id="r-cons">
+      <h2 class="sec">Construction calculator</h2>
+      <p class="help">Type lengths like <b>12' 6 3/8"</b>, <b>12 ft 6-3/8 in</b>, or just inches like <b>150.375</b>. Results round to the nearest 1/16 in.</p>
+      <div class="row">
+        <div><label for="cc-a">First length</label><input type="text" id="cc-a" autocomplete="off" value="12' 6 3/8&quot;"></div>
+        <div><label for="cc-op">Operation</label>
+          <select id="cc-op"><option value="+">Add (+)</option><option value="-">Subtract (−)</option><option value="*">Multiply by a number (×)</option>
+            <option value="/">Divide by a number (÷)</option><option value="area">Area (first × second length)</option><option value="split">Split into equal parts</option></select></div>
+        <div><label for="cc-b" id="cc-bl">Second length</label><input type="text" id="cc-b" autocomplete="off" value="3' 2 1/4&quot;"></div>
+      </div>
+      <div class="cres" id="cc-out" aria-live="polite"></div>
+
+      <h3 class="sec" style="margin-top:18px">Right triangle and roof pitch</h3>
+      <p class="help">Enter the run and either the rise or the pitch (rise per 12 in of run). Length is along the slope, before overhang or plumb cuts.</p>
+      <div class="row">
+        <div><label for="rt-run">Run</label><input type="text" id="rt-run" autocomplete="off" value="12'"></div>
+        <div><label for="rt-rise">Rise</label><input type="text" id="rt-rise" autocomplete="off" value=""></div>
+        <div><label for="rt-pitch">Or pitch, in per 12</label><input type="text" id="rt-pitch" class="num" inputmode="decimal" autocomplete="off" value="6"></div>
+      </div>
+      <div class="cres" id="rt-out" aria-live="polite"></div>
+    </div>
+
+    <!-- load calculator -->
+    <div class="panel" id="r-load">
+      <h2 class="sec">Load calculator</h2>
+      <p class="help">Checks one simply supported member with an even load, the way a textbook allowable-stress check does, and shows every step. It does not check point loads, cantilevers, continuous spans, notches or holes, lateral bracing, connections, posts, footings, vibration, or fire rating. It is for learning and for a first rough look, not for design.</p>
+      <div class="row">
+        <div><label for="l-app">What it holds up</label>
+          <select id="l-app" data-bind="load.app"><option value="floor">Floor</option><option value="roof">Roof</option><option value="ceiling">Ceiling</option><option value="post">Post (column)</option></select></div>
+        <div id="lg-kind"><label for="l-kind">Member type</label>
+          <select id="l-kind" data-bind="load.kind">
+            <option value="sawn">Dimensional lumber (2x)</option><option value="lvl19">LVL 1.9E</option><option value="lvl20">LVL 2.0E</option>
+            <option value="psl">PSL (Parallam)</option><option value="glulam">Glulam 24F-V4</option><option value="ijoist">I-joist (approximate)</option><option value="truss">Truss</option>
+          </select></div>
+        <div id="lg-mode"><label for="l-mode">Used as</label>
+          <select id="l-mode" data-bind="load.mode"><option value="joist">Joists or rafters, repeating at 24 in or less</option><option value="beam">Beam or header carrying other members</option></select></div>
+      </div>
+
+      <div id="lg-post">
+        <div class="row">
+          <div><label for="l-psize">Post</label>
+            <select id="l-psize" data-bind="load.postSize"><option value="s44">4x4 sawn lumber</option><option value="s46">4x6 sawn lumber</option>
+              <option value="p3535">PSL 3 1/2 × 3 1/2</option><option value="p35525">PSL 3 1/2 × 5 1/4</option><option value="p357">PSL 3 1/2 × 7</option>
+              <option value="p525">PSL 5 1/4 × 5 1/4</option><option value="p5257">PSL 5 1/4 × 7</option><option value="p77">PSL 7 × 7</option></select></div>
+          <div id="lg-pspecies"><label for="l-pspecies">Species and grade</label>
+            <select id="l-pspecies" data-bind="load.species"><option value="dfl2">Douglas Fir-Larch No.2</option><option value="dfl1">Douglas Fir-Larch No.1</option>
+              <option value="hf2">Hem-Fir No.2</option><option value="spf2">Spruce-Pine-Fir No.1/No.2</option><option value="syp2">Southern Pine No.2</option></select></div>
+        </div>
+        <div class="row">
+          <div><span class="lbl">Unbraced height</span><div class="dim">
+            <div class="uw"><input type="text" id="l-phft" class="num" inputmode="decimal" aria-label="Post height feet" data-bind="load.postFt"><span>ft</span></div>
+            <div class="uw"><input type="text" id="l-phin" class="num" inputmode="decimal" aria-label="Post height inches" data-bind="load.postIn"><span>in</span></div></div></div>
+          <div><label for="l-ptrib">Tributary area, sq ft</label><input type="text" id="l-ptrib" class="num" inputmode="decimal" data-bind="load.tribA"></div>
+          <div><label for="l-ppoint">Extra point load, lb (optional)</label><input type="text" id="l-ppoint" class="num" inputmode="decimal" data-bind="load.pointLb"></div>
+        </div>
+        <p class="help">Tributary area is the floor or roof area the post holds up: about half the beam span on each side of the post, times the beam's tributary width. If the post carries more than one level, add their areas or use the extra point load. 6x6 and larger sawn posts use different "posts and timbers" values and are not included.</p>
+      </div>
+
+      <div id="lg-sawn" class="row">
+        <div><label for="l-species">Species and grade</label>
+          <select id="l-species" data-bind="load.species"><option value="dfl2">Douglas Fir-Larch No.2</option><option value="dfl1">Douglas Fir-Larch No.1</option>
+            <option value="hf2">Hem-Fir No.2</option><option value="spf2">Spruce-Pine-Fir No.1/No.2</option><option value="syp2">Southern Pine No.2</option></select></div>
+        <div><label for="l-nom">Size</label><select id="l-nom" data-bind="load.nom"><option value="4">2x4</option><option value="6">2x6</option><option value="8">2x8</option><option value="10">2x10</option><option value="12">2x12</option></select></div>
+        <div><label for="l-plies">Plies nailed together</label><select id="l-plies" data-bind="load.plies"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
+      </div>
+      <div id="lg-lvl" class="row">
+        <div><label for="l-lvlply">Plies (1 3/4 in each)</label><select id="l-lvlply" data-bind="load.lvlPly"><option value="1">1 (1 3/4 in)</option><option value="2">2 (3 1/2 in)</option><option value="3">3 (5 1/4 in)</option><option value="4">4 (7 in)</option></select></div>
+        <div><label for="l-lvld">Depth</label><select id="l-lvld" data-bind="load.lvlD"><option>5.5</option><option>7.25</option><option>9.25</option><option>9.5</option><option>11.25</option><option>11.875</option><option>14</option><option>16</option><option>18</option><option>20</option><option>24</option></select></div>
+      </div>
+      <div id="lg-psl" class="row">
+        <div><label for="l-pslb">Width, in</label><select id="l-pslb" data-bind="load.pslB"><option>3.5</option><option>5.25</option><option>7</option></select></div>
+        <div><label for="l-psld">Depth, in</label><select id="l-psld" data-bind="load.pslD"><option>9.25</option><option>9.5</option><option>11.25</option><option>11.875</option><option>14</option><option>16</option><option>18</option></select></div>
+      </div>
+      <div id="lg-gl" class="row">
+        <div><label for="l-glb">Width, in</label><select id="l-glb" data-bind="load.glB"><option>3.125</option><option>3.5</option><option>5.125</option><option>5.5</option><option>6.75</option></select></div>
+        <div><label for="l-gld">Depth, in</label><select id="l-gld" data-bind="load.glD"><option>6</option><option>7.5</option><option>9</option><option>10.5</option><option>12</option><option>13.5</option><option>15</option><option>16.5</option><option>18</option><option>19.5</option><option>21</option><option>22.5</option><option>24</option></select></div>
+      </div>
+      <div id="lg-ij" class="row">
+        <div><label for="l-ijd">Depth, in</label><select id="l-ijd" data-bind="load.ijD"><option>9.5</option><option>11.875</option><option>14</option><option>16</option></select></div>
+        <div><label for="l-ijbf">Flange width, in</label><select id="l-ijbf" data-bind="load.ijBf"><option value="1.75">1 3/4</option><option value="2.0625">2 1/16</option><option value="2.3125">2 5/16</option><option value="2.5">2 1/2</option><option value="3.5">3 1/2</option></select></div>
+        <div><label for="l-ijtf">Flange thickness, in</label><select id="l-ijtf" data-bind="load.ijTf"><option value="1.375">1 3/8</option><option value="1.5">1 1/2</option></select></div>
+      </div>
+      <div id="lg-truss" class="warnbox" hidden><strong>No calculation for trusses</strong>Every truss is engineered one at a time by the truss maker for its exact shape, lumber, plates, and loads. Its strength cannot be worked out from its type and size. Use the sealed truss design drawing for the job. See <a href="#r-truss">Trusses</a> below.</div>
+
+      <div id="lg-load">
+        <div class="row" id="lg-span">
+          <div><span class="lbl">Clear span between supports</span><div class="dim">
+            <div class="uw"><input type="text" id="l-spft" class="num" inputmode="decimal" aria-label="Span feet" data-bind="load.spft"><span>ft</span></div>
+            <div class="uw"><input type="text" id="l-spin" class="num" inputmode="decimal" aria-label="Span inches" data-bind="load.spin"><span>in</span></div></div></div>
+          <div id="lg-spacing"><label for="l-spacing">Spacing, on center</label><select id="l-spacing" data-bind="load.spacing"><option value="12">12 in</option><option value="16">16 in</option><option value="19.2">19.2 in</option><option value="24">24 in</option></select></div>
+          <div id="lg-trib"><label for="l-trib">Tributary width, ft</label><input type="text" id="l-trib" class="num" inputmode="decimal" data-bind="load.trib"></div>
+        </div>
+        <p class="help" id="l-tribhelp">Tributary width is the strip of floor or roof the beam holds up: usually half the joist span on each side added together.</p>
+        <div class="row">
+          <div><label for="l-dead">Dead load, psf (pounds per sq ft)</label><input type="text" id="l-dead" class="num" inputmode="decimal" data-bind="load.dead"></div>
+          <div><label for="l-live">Live or snow load, psf</label><input type="text" id="l-live" class="num" inputmode="decimal" data-bind="load.live"></div>
+        </div>
+        <p class="help" id="l-loadhelp"></p>
+        <div class="row">
+          <div><label for="l-cd">Load duration (CD)</label><select id="l-cd" data-bind="load.CD"><option value="1">1.00 floors, occupancy</option><option value="1.15">1.15 snow</option><option value="1.25">1.25 roof live, construction</option></select></div>
+          <div id="lg-ll"><label for="l-ll">Live deflection limit</label><select id="l-ll" data-bind="load.liveLim"><option value="180">L/180</option><option value="240">L/240 (roofs)</option><option value="360">L/360 (floors)</option><option value="480">L/480 (tile floors)</option><option value="720">L/720 (stone)</option></select></div>
+          <div id="lg-tl"><label for="l-tl">Total deflection limit</label><select id="l-tl" data-bind="load.totLim"><option value="180">L/180</option><option value="240">L/240</option><option value="360">L/360</option></select></div>
+        </div>
+        <label class="chk" for="l-self" id="lg-self"><input type="checkbox" id="l-self" data-bind="load.self"> Add the beam's own weight</label>
+      </div>
+
+      <div id="l-out" aria-live="polite"></div>
+      <div class="btns" id="l-btns"><button type="button" class="btn" id="l-pdf">Save as PDF</button><button type="button" class="btn quiet" id="l-copy">Copy summary</button></div>
+      <details class="guide">
+        <summary>Where the material numbers come from</summary>
+        <ul>
+          <li>Lumber: reference design values for visually graded dimension lumber as published in the NDS Supplement and the Southern Pine grading rules (2013 and later). Southern Pine values are already by size. Other species use the NDS size factor.</li>
+          <li>LVL, PSL, and glulam: typical values for common products (for example LVL Fb 2,600 psi, PSL Fb 2,900 psi, glulam 24F-V4 Fb 2,400 psi). Real products differ by maker. Use the maker's own values and span tables.</li>
+          <li>I-joist: a rough estimate from the flange size, assuming a flange stress of 1,400 psi and E of 1.8 million psi. I-joists are proprietary. The maker's published values are the only ones that count.</li>
+          <li>Posts: NDS column stability method (CP) with Ke = 1.0. Sawn 4x posts use NDS dimension lumber Fc and Emin values with the size factor. PSL posts use typical 1.8E column values (Fc 2,500 psi, E 1.8 million psi).</li>
+          <li>Assumes dry service, normal temperatures, no incising, and a compression edge fully braced by sheathing (CL = 1).</li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- terms and engineered wood -->
+    <div class="panel" id="r-terms">
+      <h2 class="sec">Load terms and wood types</h2>
+      <details class="guide"><summary>Load and strength terms</summary>
+        <ul>
+          <li><b>Live load:</b> weight that comes and goes: people, furniture, stored items. Measured in pounds per square foot (psf). Homes commonly use 40 psf for living areas and decks, 30 psf for sleeping rooms, and 10 to 20 psf for attics.</li>
+          <li><b>Dead load:</b> the permanent weight of the building itself: framing, sheathing, drywall, flooring, roofing. Often 10 psf for floors and 15 psf for roofs, more with tile, stone, or heavy roofing.</li>
+          <li><b>Snow load:</b> the roof load from snow. It depends on where you are, and the local building department sets it.</li>
+          <li><b>psf, plf, and lb:</b> psf spreads a load over an area. plf (pounds per linear foot) is that load gathered onto one member. lb is a single point load, such as a post or a beam end.</li>
+          <li><b>Span:</b> the distance between supports. A clear span is measured between the faces of the supports.</li>
+          <li><b>On-center (o.c.) spacing:</b> the distance from the center of one joist or rafter to the next, usually 12, 16, 19.2, or 24 in.</li>
+          <li><b>Tributary width or area:</b> the part of the floor or roof a member holds up. A beam carries half the joist span on each side. A post carries the area around it, out to halfway to the next supports.</li>
+          <li><b>Bending (moment):</b> the bending effect of a load. It is largest at mid-span, and it is what usually limits long members.</li>
+          <li><b>Shear:</b> the force trying to slide one part of a member past the next, greatest near the supports. It usually controls short, heavily loaded members.</li>
+          <li><b>Bearing:</b> the crushing of wood where a member sits on a support. It decides how much seat length a beam or joist needs at each end.</li>
+          <li><b>Deflection:</b> how far a member sags under load. Limits are written as a fraction of the span: L/360 means the sag may be no more than the span divided by 360. Floors commonly use L/360, roofs L/240, and tile floors stiffer limits.</li>
+          <li><b>Axial load and buckling:</b> a post is loaded along its length. Tall, thin posts fail by bowing sideways (buckling) well before the wood crushes, which is why height matters so much.</li>
+          <li><b>Load duration (CD):</b> wood carries short-term loads better than permanent ones, so snow and construction loads get a small increase in allowable stress.</li>
+          <li><b>Design values (Fb, Fv, Fc, Fc⊥, E):</b> the published allowable stresses in bending, shear, compression along the grain, and compression across the grain (bearing), plus stiffness (E). They depend on species, grade, and product.</li>
+        </ul>
+      </details>
+      <details class="guide"><summary>Wood products and what they are used for</summary>
+        <ul>
+          <li><b>Dimensional lumber (2x4 to 2x12, 4x4, 4x6):</b> sawn boards graded by species and grade (for example Douglas Fir-Larch No.2). Used for studs, joists, rafters, short headers, deck framing, and posts. Inexpensive and easy to cut, but limited in length and more prone to warping and shrinking.</li>
+          <li><b>LVL (laminated veneer lumber):</b> thin veneers glued with the grain running lengthwise, sold in 1 3/4 in plies. Used for headers, beams, ridge beams, and flush beams. Strong, straight, and predictable. Plies are nailed or bolted together per the maker's pattern.</li>
+          <li><b>PSL (parallel strand lumber, sold as Parallam):</b> long wood strands glued into large solid sections. Used for heavy beams, long-span headers, girders, and posts and columns. Very strong, available in thick solid widths, and often left exposed.</li>
+          <li><b>LSL (laminated strand lumber):</b> shorter strands glued into panels and boards. Used for rim board, tall-wall studs, short headers, and window framing. Very straight, but not as strong as LVL or PSL for long spans.</li>
+          <li><b>Glulam (glued laminated timber):</b> layers of lumber glued together, often in 1 1/2 in lams. Used for long beams, exposed beams, curved or arched members, and garage door headers. Stock beams may be cambered (built with a slight upward curve) to offset sag.</li>
+          <li><b>I-joists:</b> top and bottom flanges (LVL or lumber) joined by an OSB or plywood web. Used for floor and roof joists over longer spans. Light, straight, and stiff. Holes are allowed only where the maker's chart allows them, and they often need web stiffeners, blocking, and squash blocks.</li>
+          <li><b>Floor trusses (open web):</b> parallel-chord trusses built by a truss maker. Used for long floor spans with room to run ducts and pipes through the webs.</li>
+          <li><b>Roof trusses:</b> engineered triangle frames built for each job. Used for most new roofs. Never cut or alter them. See Trusses below.</li>
+          <li><b>Rim board:</b> LSL, OSB, or LVL boards around the edge of a floor. They close off the joist ends and carry wall loads down.</li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- trusses -->
+    <div class="panel" id="r-truss">
+      <h2 class="sec">Trusses</h2>
+      <p class="help">Reference only. Trusses are designed by the truss maker for each job, and the sealed truss design drawing controls.</p>
+      <details class="guide"><summary>Common truss types</summary>
+        <ul>
+          <li><b>Fink (W):</b> the most common house roof truss. Webs form a W. Economical for typical spans.</li>
+          <li><b>Howe and Pratt:</b> vertical and diagonal webs. Used for longer spans and heavier loads.</li>
+          <li><b>King post and queen post:</b> simple trusses for short spans, sheds, and garages.</li>
+          <li><b>Scissor:</b> sloped bottom chord for vaulted ceilings. Pushes out on walls more than flat trusses, so supports matter.</li>
+          <li><b>Attic (room-in-attic):</b> open center for a usable room. Designed for floor loads in that area.</li>
+          <li><b>Mono (single slope):</b> one sloped top chord. Used for lean-tos, additions, and shed roofs.</li>
+          <li><b>Hip, step-down, and jack trusses:</b> build a hip roof. Usually carried by a girder truss.</li>
+          <li><b>Girder truss:</b> a multi-ply truss that carries other trusses. Needs specific connections and bearing.</li>
+          <li><b>Gable end:</b> sits on an end wall, with studs for siding. Often not designed to carry load like a regular truss.</li>
+          <li><b>Floor truss (parallel chord):</b> open webs for running ducts, pipes, and wires. Common in 12 to 24 in depths.</li>
+          <li><b>Piggyback:</b> a cap truss set on top of a flat-top truss when the full height is too tall to ship.</li>
+        </ul>
+      </details>
+      <details class="guide"><summary>Rules that apply to every truss</summary>
+        <ul>
+          <li>Never cut, notch, drill, or remove any chord, web, or plate. Repairs need an engineered repair detail from the truss maker.</li>
+          <li>Install temporary and permanent bracing as the truss drawings and the BCSI guide (SBCA and TPI) require. Most truss collapses happen during installation.</li>
+          <li>Do not add load the truss was not designed for: attic storage, HVAC units, solar panels, water heaters, or heavy ceilings. Ask the truss maker first.</li>
+          <li>Set each truss on the bearing points shown on its drawing, with the specified connectors and hurricane ties.</li>
+          <li>Do not stack heavy material on trusses during construction.</li>
+          <li>Keep a copy of the truss design drawings for the building official and future work.</li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- guides -->
+    <div class="panel" id="r-guides">
+      <h2 class="sec">How-to guides</h2>
+      <p class="help">General steps for common installs. The product maker's instructions and your local code come first. Not following them can void a warranty.</p>
+
+      <details class="guide"><summary>Carpet (stretch-in over pad)</summary>
+        <ol>
+          <li>Remove old flooring, staples, and debris. Fix squeaks and fill low spots. The subfloor should be clean, dry, and flat.</li>
+          <li>Install tack strip around the room, pins toward the wall, leaving a gap from the wall a little less than the carpet thickness (often about 3/8 in). Skip doorways.</li>
+          <li>Lay pad inside the tack strip, not over it. Butt seams tight, tape them, and staple (wood) or glue (concrete) the pad down. Run pad seams across carpet seams, not under them.</li>
+          <li>Plan seams away from traffic paths and doorways, with all pieces running the same pile direction. Rough-cut carpet 3 to 6 in oversize on every side.</li>
+          <li>Join seams with hot-melt seam tape and a seaming iron. Press the seam closed and weight it while it cools.</li>
+          <li>Hook one corner on the tack strip, then use a knee kicker along the first walls.</li>
+          <li>Stretch across the room with a power stretcher. A knee kicker alone cannot stretch a full room and leads to wrinkles later.</li>
+          <li>Trim the excess with a wall trimmer and tuck the edge into the gully with a stair tool.</li>
+          <li>Cut vent openings, install transition strips at doorways, and vacuum.</li>
+        </ol>
+      </details>
+
+      <details class="guide"><summary>Luxury vinyl plank (click, floating)</summary>
+        <ol>
+          <li>Acclimate the boxes in the room if the maker requires it. Check the subfloor is flat to the maker's spec (often about 3/16 in over 10 ft), clean, and dry. Test concrete for moisture if required.</li>
+          <li>Undercut door jambs and casing so planks slide under them.</li>
+          <li>Plan the layout so the first and last rows are not thin slivers. Lay planks parallel to the longest wall or the main light source.</li>
+          <li>Install underlayment only if the maker allows it (many planks have it attached).</li>
+          <li>Leave the expansion gap the maker specifies (often about 1/4 in) at every wall and fixed object. Use spacers.</li>
+          <li>Click rows together as the maker shows. Stagger end joints by at least the maker's minimum (often 6 to 8 in). Avoid patterns like stair steps.</li>
+          <li>Cut with a utility knife (score and snap) or a saw. Use the cut-off to start the next row if it is long enough.</li>
+          <li>Do not nail or screw through a floating floor, and keep heavy cabinets off it unless the maker allows.</li>
+          <li>Install baseboard or quarter round to cover the gap, fastening it to the wall, not the floor. Add transitions.</li>
+        </ol>
+      </details>
+
+      <details class="guide"><summary>Laminate (click, floating)</summary>
+        <ol>
+          <li>Acclimate as the maker requires, usually 48 hours in the room. Check flatness and moisture as for LVP.</li>
+          <li>On concrete, lay a 6 mil plastic vapor barrier (or a combo underlayment), lapped and taped. Then lay underlayment with seams butted and taped.</li>
+          <li>Undercut door jambs. Plan the layout to avoid thin first and last rows.</li>
+          <li>Keep the expansion gap the maker specifies (often 1/4 to 3/8 in) at every wall, pipe, and fixed object.</li>
+          <li>Lock boards together, using a tapping block and pull bar. Never hit the edge directly.</li>
+          <li>Stagger end joints by at least the maker's minimum (often 12 in).</li>
+          <li>Use transitions where the maker requires breaks, such as doorways and long runs.</li>
+          <li>Keep laminate out of wet areas unless it is rated water-resistant, and even then follow the maker's limits.</li>
+          <li>Install trim to cover the gaps, fastened to the wall only.</li>
+        </ol>
+      </details>
+
+      <details class="guide"><summary>Solid hardwood (nail-down)</summary>
+        <ol>
+          <li>Use solid hardwood only on or above grade, over a wood subfloor, not directly on concrete.</li>
+          <li>Acclimate the wood. Check moisture in both the flooring and the subfloor with a meter, and keep them within the range the maker specifies.</li>
+          <li>Fix squeaks, re-screw the subfloor, and check flatness. Lay the underlayment paper or felt the maker specifies.</li>
+          <li>Run boards perpendicular to the floor joists when possible.</li>
+          <li>Snap a straight starting line. Leave the expansion gap the maker specifies (often about 3/4 in) at walls.</li>
+          <li>Face-nail and blind-nail the first rows by hand where the flooring nailer will not fit.</li>
+          <li>Use a flooring nailer with the cleats or staples the maker specifies, near each end and at the spacing it calls for (often every 6 to 8 in).</li>
+          <li>Rack out boards from several boxes so colors mix and end joints stagger well.</li>
+          <li>Face-nail the last rows, fill nail holes, and install trim. Sand and finish if the flooring is unfinished.</li>
+        </ol>
+      </details>
+
+      <details class="guide"><summary>Engineered wood (float, glue, or nail)</summary>
+        <ol>
+          <li>Check which methods the maker allows for your product and floor. Many engineered floors can go on concrete and below grade. Solid hardwood cannot.</li>
+          <li>Acclimate and test moisture as the maker requires. Flatten the subfloor.</li>
+          <li><b>Floating:</b> lay the specified underlayment and vapor barrier, then click or glue the joints. Keep the expansion gap.</li>
+          <li><b>Glue-down:</b> spread the maker's adhesive with the notched trowel it specifies. Work in sections within the adhesive's open time, and roll or weight the boards.</li>
+          <li><b>Nail or staple:</b> use the fastener size and spacing the maker gives. Thin products need fine staples, not standard flooring cleats.</li>
+          <li>Stagger end joints, mix boxes, and keep the expansion gap at walls.</li>
+          <li>Install trim and transitions. Keep traffic off glue-down floors as long as the adhesive requires.</li>
+        </ol>
+      </details>
+
+      <details class="guide"><summary>Tile (thinset)</summary>
+        <ol>
+          <li>Make sure the floor is stiff enough. The TCNA Handbook asks for L/360 for ceramic and porcelain and L/720 for natural stone.</li>
+          <li>Prepare the substrate: cement backer board set in thinset and screwed on its pattern, or an uncoupling membrane, over a sound subfloor. Concrete must be clean and crack-free, or treated for cracks.</li>
+          <li>Find the room's center lines and dry-lay tile both ways, so the edge cuts are at least half a tile where possible.</li>
+          <li>Mix thinset as the bag says, let it slake, and remix. Use the trowel notch the tile and thinset makers call for. Large tiles need bigger notches and back-buttering.</li>
+          <li>Comb thinset in straight lines, set each tile, and slide it slightly across the ridges. Lift one now and then to check coverage.</li>
+          <li>Use spacers, keep joints straight, and use a leveling system for large tiles to control lippage.</li>
+          <li>Leave movement joints at the perimeter and wherever the tile meets another surface. Fill them with flexible sealant, not grout.</li>
+          <li>Let the thinset cure as the maker says, then grout. Wipe the haze, let it cure, and seal cement grout if the maker recommends it.</li>
+        </ol>
+      </details>
+
+      <details class="guide"><summary>Hanging drywall</summary>
+        <ol>
+          <li>Check that framing is straight and that blocking is in place for cabinets, grab bars, and TVs. Mark stud and joist centers on the floor and top plate.</li>
+          <li>Hang ceilings first, then walls. Run sheets perpendicular to the framing.</li>
+          <li>On walls, hang the top row first, tight to the ceiling. Then hang the bottom row, leaving about 1/2 in at the floor.</li>
+          <li>Land every end joint on framing, and stagger end joints from row to row. Keep joints from lining up with door and window corners. Cut around openings so a sheet spans the corner.</li>
+          <li>Measure each piece and cut it about 1/8 in short. Score with a utility knife against a T-square, snap, and cut the back paper.</li>
+          <li>Cut outlet and fixture openings with a spiral saw or keyhole saw. Mark them before hanging so you do not miss any.</li>
+          <li>Fasten with drywall screws: common spacing is about 12 in on ceilings and 16 in on walls, at least 3/8 in from edges. Set each head just below the surface without tearing the paper. Fire-rated work must follow the listed assembly's screw spacing.</li>
+          <li>Install corner bead on outside corners, straight and plumb.</li>
+          <li>Tape and finish: bed tape in compound on every joint, then fill and feather with at least two more coats, wider each time. Sand lightly between coats. Wear a dust mask.</li>
+        </ol>
+      </details>
+    </div>
+
+    <div class="notice" data-notice></div>
+  </section>
   </main>
 
   <footer class="foot">
@@ -436,6 +885,7 @@ details.guide ul{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:c
 </div>
 
 <div id="toast" class="toast" role="status" hidden></div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 (function (g) {
@@ -683,6 +1133,285 @@ details.guide ul{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:c
 
   g.PT = PT;
 })(typeof window !== 'undefined' ? window : globalThis);
+(function (g) {
+'use strict';
+var PT = g.PT;
+var gcd = function (a, b) { return b ? gcd(b, a % b) : a; };
+
+/* ---------- lengths to 1/16 in, signed ---------- */
+PT.fmtLen16 = function (inches) {
+  if (!isFinite(inches)) return '—';
+  var neg = inches < 0, t = Math.round(Math.abs(inches) * 16) / 16;
+  var ft = Math.floor(t / 12 + 1e-9), rem = t - ft * 12, whole = Math.floor(rem + 1e-9), n = Math.round((rem - whole) * 16);
+  if (n === 16) { whole++; n = 0; }
+  if (whole === 12) { ft++; whole = 0; }
+  var frac = ''; if (n) { var d = gcd(n, 16); frac = (n / d) + '/' + (16 / d); }
+  var inPart = [whole ? String(whole) : '', frac].filter(Boolean).join(' ');
+  var parts = []; if (ft) parts.push(ft + ' ft'); if (inPart) parts.push(inPart + ' in');
+  return (neg && (ft || inPart) ? '−' : '') + (parts.length ? parts.join(' ') : '0 in');
+};
+
+/* ---------- drywall ---------- */
+PT.SHEETS = { '4x8': [48, 96], '4x9': [48, 108], '4x10': [48, 120], '4x12': [48, 144], '54x12': [54, 144] };
+PT.drywall = function (o) {
+  var walls = (o.walls || []).filter(function (w) { return w.lenIn > 0 && w.hIn > 0; });
+  var ceils = (o.ceils || []).filter(function (c) { return c.lenIn > 0 && c.widIn > 0; });
+  var wallFt2 = walls.reduce(function (s, w) { return s + w.lenIn * w.hIn / 144 * Math.max(1, Math.round(w.qty || 1)); }, 0);
+  var ceilFt2 = ceils.reduce(function (s, c) { return s + c.lenIn * c.widIn / 144; }, 0);
+  var subFt2 = o.subtract ? Math.max(0, (o.doors || 0) * (o.doorFt2 || 0) + (o.windows || 0) * (o.winFt2 || 0) + (o.otherFt2 || 0)) : 0;
+  var gross = wallFt2 + ceilFt2, net = Math.max(0, gross - subFt2);
+  var dim = PT.SHEETS[o.size] || PT.SHEETS['4x8'], sheetFt2 = dim[0] * dim[1] / 144;
+  var waste = Math.max(0, o.waste || 0), withWaste = net * (1 + waste / 100);
+  var sheets = net > 0 ? Math.ceil(withWaste / sheetFt2 - 1e-9) : 0;
+  var board = sheets * sheetFt2;
+  var tapeFt = board * (o.tapeRate || 0) / 1000;
+  var mudGal = board * (o.mudRate || 0) / 1000;
+  var screws = Math.ceil(board * (o.screwRate || 0));
+  var screwLb = board * (o.screwLbRate || 0) / 1000;
+  var beadPcs = 0;
+  if ((o.corners || 0) > 0 && (o.cornerHIn || 0) > 0 && (o.beadFt || 0) > 0) beadPcs = Math.round(o.corners) * Math.ceil(o.cornerHIn / (o.beadFt * 12) - 1e-9);
+  var price = o.price || 0, material = sheets * price, tax = material * (o.taxPct || 0) / 100;
+  return { wallFt2: wallFt2, ceilFt2: ceilFt2, subFt2: subFt2, gross: gross, net: net, sheetFt2: sheetFt2, withWaste: withWaste,
+    sheets: sheets, board: board, tapeFt: tapeFt, tapeRolls: o.tapeRoll > 0 ? Math.ceil(tapeFt / o.tapeRoll - 1e-9) : null,
+    mudGal: mudGal, mudPkgs: o.mudPkg > 0 ? Math.ceil(mudGal / o.mudPkg - 1e-9) : null, screws: screws, screwLb: screwLb,
+    beadPcs: beadPcs, material: material, tax: tax, total: material + tax };
+};
+
+/* ---------- standard calculator: safe expression evaluator ---------- */
+PT.calc = function (expr) {
+  var s = String(expr).replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-').replace(/\s+/g, '');
+  var i = 0;
+  function num() {
+    var m = s.slice(i).match(/^(\d+\.?\d*|\.\d+)(%?)/); if (!m) throw new Error('bad');
+    i += m[0].length; return parseFloat(m[1]) / (m[2] ? 100 : 1);
+  }
+  function factor() {
+    if (s[i] === '-') { i++; return -factor(); }
+    if (s[i] === '+') { i++; return factor(); }
+    if (s[i] === '(') { i++; var v = expr0(); if (s[i] !== ')') throw new Error('bad'); i++; return v; }
+    return num();
+  }
+  function term() {
+    var v = factor();
+    while (s[i] === '*' || s[i] === '/') { var op = s[i++], r = factor(); v = op === '*' ? v * r : v / r; }
+    return v;
+  }
+  function expr0() {
+    var v = term();
+    while (s[i] === '+' || s[i] === '-') { var op = s[i++], r = term(); v = op === '+' ? v + r : v - r; }
+    return v;
+  }
+  if (!s) return 0;
+  var v = expr0(); if (i !== s.length) throw new Error('bad');
+  if (!isFinite(v)) throw new Error('div0');
+  return v;
+};
+
+/* ---------- construction length parser: 12' 6 3/8", 12ft 6in, 6-3/8, 150.5 (inches) ---------- */
+PT.parseLen = function (str) {
+  var s = String(str == null ? '' : str).trim().toLowerCase().replace(/[’′]/g, "'").replace(/[”″]/g, '"').replace(/feet|foot|ft/g, "'").replace(/inches|inch|in/g, '"');
+  if (!s) return 0;
+  var neg = false; if (/^[-−]/.test(s)) { neg = true; s = s.slice(1).trim(); }
+  var ft = 0, rest = s, fi = s.indexOf("'");
+  if (fi >= 0) { ft = parseFloat(s.slice(0, fi)); if (!isFinite(ft)) return NaN; rest = s.slice(fi + 1); }
+  rest = rest.replace(/"/g, '').replace(/(\d)-(\d+\/\d+)/, '$1 $2').trim();
+  var inch = 0;
+  if (rest) {
+    var m = rest.match(/^(\d*\.?\d+)\s+(\d+)\s*\/\s*(\d+)$/), m2 = rest.match(/^(\d+)\s*\/\s*(\d+)$/), m3 = rest.match(/^\d*\.?\d+$/);
+    if (m) inch = parseFloat(m[1]) + (+m[3] ? +m[2] / +m[3] : NaN);
+    else if (m2) inch = +m2[2] ? +m2[1] / +m2[2] : NaN;
+    else if (m3) inch = parseFloat(rest);
+    else return NaN;
+  }
+  var v = ft * 12 + inch; return neg ? -v : v;
+};
+
+/* ---------- wood member check (simplified ASD, NDS-style) ---------- */
+var SAWN = {
+  dfl2: { name: 'Douglas Fir-Larch No.2', Fb: 900, Fv: 180, Fcp: 625, E: 1600000, cf: true },
+  dfl1: { name: 'Douglas Fir-Larch No.1', Fb: 1000, Fv: 180, Fcp: 625, E: 1700000, cf: true },
+  hf2: { name: 'Hem-Fir No.2', Fb: 850, Fv: 150, Fcp: 405, E: 1300000, cf: true },
+  spf2: { name: 'Spruce-Pine-Fir No.1/No.2', Fb: 875, Fv: 135, Fcp: 425, E: 1400000, cf: true },
+  syp2: { name: 'Southern Pine No.2', FbBy: { 4: 1100, 6: 1000, 8: 925, 10: 800, 12: 750 }, Fv: 175, Fcp: 565, E: 1400000, cf: false }
+};
+var DEPTH = { 4: 3.5, 6: 5.5, 8: 7.25, 10: 9.25, 12: 11.25 };
+var CF = { 4: 1.5, 6: 1.3, 8: 1.2, 10: 1.1, 12: 1.0 };
+var ENG = {
+  lvl19: { name: 'LVL 1.9E (typical)', Fb: 2600, Fv: 285, Fcp: 750, E: 1900000, dexp: 0.136, pcf: 42 },
+  lvl20: { name: 'LVL 2.0E (typical)', Fb: 2600, Fv: 285, Fcp: 750, E: 2000000, dexp: 0.136, pcf: 42 },
+  psl: { name: 'PSL / Parallam 2.0E (typical)', Fb: 2900, Fv: 290, Fcp: 625, E: 2000000, dexp: 0.111, pcf: 45 },
+  glulam: { name: 'Glulam 24F-V4 Douglas Fir (typical)', Fb: 2400, Fv: 240, Fcp: 650, E: 1800000, pcf: 36 }
+};
+PT.WOOD = { SAWN: SAWN, ENG: ENG, DEPTH: DEPTH, CF: CF };
+var IJ = { Ff: 1400, E: 1800000, tw: 0.375, pcf: 42 };
+PT.IJ = IJ;
+
+var r0 = function (v, d) { return PT.fmt(v, d == null ? 0 : d); };
+
+/* o: { kind:'sawn'|'lvl19'|'lvl20'|'psl'|'glulam'|'ijoist', species, nom, plies, b, d, bf, tf,
+        mode:'joist'|'beam', spanIn, spacingIn, tribFt, dead, live, CD, liveLim, totLim, selfWeight } */
+PT.member = function (o) {
+  var st = [], warn = [], k = o.kind, L = o.spanIn, Lft = L / 12;
+  var b, d, A, S, I, Fb, Fv, Fcp, E, name, Cfac = [], pcf = 35, isIJ = k === 'ijoist';
+  if (!(L > 0)) return null;
+  if (k === 'sawn') {
+    var sp = SAWN[o.species] || SAWN.dfl2, nom = +o.nom || 10, plies = Math.max(1, Math.round(o.plies || 1));
+    b = 1.5 * plies; d = DEPTH[nom]; name = plies + ' x 2x' + nom + ' ' + sp.name;
+    Fb = sp.cf ? sp.Fb : sp.FbBy[nom]; Fv = sp.Fv; Fcp = sp.Fcp; E = sp.E; pcf = 35;
+  } else if (isIJ) {
+    d = o.d; b = o.bf; name = 'I-joist approximation, ' + o.d + ' in deep, ' + o.bf + ' x ' + o.tf + ' in flanges';
+    E = IJ.E; pcf = IJ.pcf;
+  } else {
+    var m = ENG[k]; b = o.b; d = o.d; name = m.name + ', ' + b + ' x ' + d + ' in';
+    Fb = m.Fb; Fv = m.Fv; Fcp = m.Fcp; E = m.E; pcf = m.pcf;
+  }
+  if (!(b > 0 && d > 0)) return null;
+
+  /* 1. section */
+  if (isIJ) {
+    var bf = o.bf, tf = o.tf, tw = IJ.tw, hw = d - 2 * tf;
+    A = 2 * bf * tf + tw * hw;
+    I = (bf * Math.pow(d, 3) - (bf - tw) * Math.pow(hw, 3)) / 12;
+    st.push({ h: 'Section properties (flanges + 3/8 in web, web stiffness ignored in bending capacity)',
+      f: 'I = [bf·d³ − (bf − tw)·(d − 2tf)³] / 12',
+      s: '[' + bf + '·' + d + '³ − (' + bf + ' − ' + tw + ')·(' + d + ' − 2·' + tf + ')³] / 12', r: 'I = ' + r0(I, 1) + ' in⁴' });
+  } else {
+    A = b * d; S = b * d * d / 6; I = b * Math.pow(d, 3) / 12;
+    st.push({ h: 'Section properties (actual size ' + b + ' in wide × ' + d + ' in deep)', f: 'A = b·d    S = b·d²/6    I = b·d³/12',
+      s: 'A = ' + b + '·' + d + '    S = ' + b + '·' + d + '²/6    I = ' + b + '·' + d + '³/12',
+      r: 'A = ' + r0(A, 2) + ' in²    S = ' + r0(S, 2) + ' in³    I = ' + r0(I, 1) + ' in⁴' });
+  }
+
+  /* 2. loads */
+  var widthFt = o.mode === 'joist' ? o.spacingIn / 12 : o.tribFt;
+  var wD = o.dead * widthFt, wL = o.live * widthFt, wSelf = 0;
+  if (o.mode === 'beam' && o.selfWeight) wSelf = pcf * A / 144;
+  var wT = wD + wL + wSelf;
+  st.push({ h: 'Load on the member (pounds per linear foot, plf)',
+    f: o.mode === 'joist' ? 'w = (dead + live) × spacing' : 'w = (dead + live) × tributary width' + (wSelf ? ' + self-weight' : ''),
+    s: o.mode === 'joist' ? '(' + o.dead + ' + ' + o.live + ') psf × ' + r0(widthFt, 3) + ' ft' :
+      '(' + o.dead + ' + ' + o.live + ') psf × ' + r0(widthFt, 2) + ' ft' + (wSelf ? ' + ' + pcf + ' pcf × ' + r0(A, 2) + ' in² / 144' : ''),
+    r: 'w = ' + r0(wT, 1) + ' plf total (live ' + r0(wL, 1) + ' plf)' });
+
+  /* 3. moment and shear */
+  var M = wT * Lft * Lft / 8, V = wT * Lft / 2, Min = M * 12;
+  st.push({ h: 'Maximum bending moment and shear (simple span, uniform load)', f: 'M = w·L²/8    V = w·L/2',
+    s: 'M = ' + r0(wT, 1) + '·' + r0(Lft, 3) + '²/8    V = ' + r0(wT, 1) + '·' + r0(Lft, 3) + '/2',
+    r: 'M = ' + r0(M) + ' ft-lb (' + r0(Min) + ' in-lb)    V = ' + r0(V) + ' lb' });
+
+  /* 4. bending */
+  var checks = [], fb, Fbp, ratioB;
+  if (isIJ) {
+    var Af = o.bf * o.tf, arm = d - o.tf, Mcap = IJ.Ff * o.CD * Af * arm;
+    ratioB = Min / Mcap;
+    st.push({ h: 'Bending (approximate: flanges carry the moment)', f: 'M allow = F flange × CD × A flange × (d − tf)',
+      s: IJ.Ff + ' psi × ' + o.CD + ' × ' + r0(Af, 3) + ' in² × ' + r0(arm, 3) + ' in',
+      r: 'M allow ≈ ' + r0(Mcap) + ' in-lb vs M = ' + r0(Min) + ' in-lb → ' + r0(ratioB * 100) + '% used', ok: ratioB <= 1 });
+    warn.push('The flange stress (' + IJ.Ff + ' psi) and stiffness (E = ' + (IJ.E / 1e6) + ' million psi) are assumed generic values. Real I-joists are rated by their manufacturer, and their published moment, shear, stiffness and bearing values control.');
+  } else {
+    var fac = [['CD (load duration)', o.CD]];
+    if (k === 'sawn') {
+      if (SAWN[o.species].cf) fac.push(['CF (size factor, 2x' + o.nom + ')', CF[o.nom]]);
+      if (o.mode === 'joist') fac.push(['Cr (repetitive members at 24 in or less)', 1.15]);
+    } else if (k === 'glulam') {
+      var CV = Math.min(1, Math.pow(21 / Lft, 0.1) * Math.pow(12 / d, 0.1) * Math.pow(5.125 / b, 0.1));
+      fac.push(['CV (volume factor) = (21/L)^0.1·(12/d)^0.1·(5.125/b)^0.1, max 1', +CV.toFixed(3)]);
+    } else {
+      var CDp = Math.pow(12 / d, ENG[k].dexp); if (d < 3.5) CDp = Math.pow(12 / 3.5, ENG[k].dexp);
+      fac.push(['Depth factor = (12/d)^' + ENG[k].dexp, +CDp.toFixed(3)]);
+    }
+    Fbp = Fb; fac.forEach(function (f) { Fbp *= f[1]; });
+    fb = Min / S; ratioB = fb / Fbp;
+    st.push({ h: 'Allowable bending stress', f: "Fb' = Fb × " + fac.map(function (f) { return f[0].split(' ')[0]; }).join(' × '),
+      s: Fb + ' × ' + fac.map(function (f) { return f[1]; }).join(' × '), r: "Fb' = " + r0(Fbp) + ' psi', note: fac.map(function (f) { return f[0] + ' = ' + f[1]; }).join('; ') });
+    st.push({ h: 'Bending check', f: "fb = M / S, must be ≤ Fb'", s: r0(Min) + ' / ' + r0(S, 2),
+      r: 'fb = ' + r0(fb) + " psi vs Fb' = " + r0(Fbp) + ' psi → ' + r0(ratioB * 100) + '% used', ok: ratioB <= 1 });
+  }
+  checks.push(['Bending', ratioB]);
+
+  /* 5. shear */
+  if (!isIJ) {
+    var Fvp = Fv * o.CD, fv = 1.5 * V / A, ratioV = fv / Fvp;
+    st.push({ h: 'Shear check', f: "fv = 1.5·V / A, must be ≤ Fv' = Fv × CD", s: '1.5·' + r0(V) + ' / ' + r0(A, 2) + '    Fv\' = ' + Fv + ' × ' + o.CD,
+      r: 'fv = ' + r0(fv) + " psi vs Fv' = " + r0(Fvp) + ' psi → ' + r0(ratioV * 100) + '% used', ok: ratioV <= 1,
+      note: 'Uses the full end reaction. Codes allow loads within d of the support to be ignored, so this is conservative.' });
+    checks.push(['Shear', ratioV]);
+  } else {
+    st.push({ h: 'Shear and bearing', f: 'Not calculated', s: '', r: 'I-joist shear, bearing length and web stiffeners must come from the manufacturer\'s table for the exact product.' });
+  }
+
+  /* 6. deflection */
+  var EI = E * I, wLi = wL / 12, wTi = wT / 12, L4 = Math.pow(L, 4);
+  var dL = 5 * wLi * L4 / (384 * EI), dT = 5 * wTi * L4 / (384 * EI), aL = L / o.liveLim, aT = L / o.totLim;
+  st.push({ h: 'Live load deflection', f: 'Δ = 5·w·L⁴ / (384·E·I), w in lb/in, L in inches; limit L/' + o.liveLim,
+    s: '5·' + r0(wLi, 3) + '·' + r0(L, 2) + '⁴ / (384·' + r0(E) + '·' + r0(I, 1) + ')',
+    r: 'Δ live = ' + r0(dL, 3) + ' in vs L/' + o.liveLim + ' = ' + r0(aL, 3) + ' in → ' + r0(dL / aL * 100) + '% used', ok: dL <= aL });
+  st.push({ h: 'Total load deflection', f: 'Same formula with total load; limit L/' + o.totLim,
+    s: '5·' + r0(wTi, 3) + '·' + r0(L, 2) + '⁴ / (384·' + r0(E) + '·' + r0(I, 1) + ')',
+    r: 'Δ total = ' + r0(dT, 3) + ' in vs L/' + o.totLim + ' = ' + r0(aT, 3) + ' in → ' + r0(dT / aT * 100) + '% used', ok: dT <= aT,
+    note: isIJ ? 'Shear deflection is not included. Real I-joist deflection is larger than this.' : 'Long-term creep is not included.' });
+  checks.push(['Live deflection', dL / aL], ['Total deflection', dT / aT]);
+
+  /* 7. bearing */
+  if (!isIJ) {
+    var reqB = V / (Fcp * b);
+    st.push({ h: 'Bearing length needed at each end', f: 'length = R / (Fc⊥ × b)', s: r0(V) + ' / (' + Fcp + ' × ' + b + ')',
+      r: 'At least ' + r0(reqB, 2) + ' in of bearing (use no less than 1.5 in, or what the code or maker requires)',
+      note: 'Checks the member only. The post, wall, or hanger it sits on needs its own check.' });
+  }
+  var worst = checks.reduce(function (a, c) { return c[1] > a[1] ? c : a; }, ['', 0]);
+  return { name: name, steps: st, checks: checks, worst: worst, pass: worst[1] <= 1, w: wT, M: M, V: V, warn: warn, b: b, d: d };
+};
+/* ---------- post (column) check, NDS 3.7 column stability ---------- */
+var POSTS = {
+  s44: { name: '4x4 sawn', b: 3.5, d: 3.5, sawn: true, CF: 1.15 },
+  s46: { name: '4x6 sawn', b: 3.5, d: 5.5, sawn: true, CF: 1.1 },
+  p3535: { name: 'PSL 3 1/2 x 3 1/2', b: 3.5, d: 3.5 }, p35525: { name: 'PSL 3 1/2 x 5 1/4', b: 3.5, d: 5.25 },
+  p357: { name: 'PSL 3 1/2 x 7', b: 3.5, d: 7 }, p525: { name: 'PSL 5 1/4 x 5 1/4', b: 5.25, d: 5.25 },
+  p5257: { name: 'PSL 5 1/4 x 7', b: 5.25, d: 7 }, p77: { name: 'PSL 7 x 7', b: 7, d: 7 }
+};
+var FC = { dfl2: [1350, 580000], dfl1: [1500, 620000], hf2: [1300, 470000], spf2: [1150, 510000], syp2: [1450, 510000] };
+var PSLC = { Fc: 2500, E: 1800000 };
+PT.POSTS = POSTS; PT.PSLC = PSLC;
+/* o: { size, species, hIn, CD, tribFt2, dead, live, pointLb } */
+PT.post = function (o) {
+  var p = POSTS[o.size]; if (!p || !(o.hIn > 0)) return null;
+  var st = [], b = p.b, d = p.d, A = b * d, least = Math.min(b, d), name, Fc, Emin, c, cfac = [];
+  if (p.sawn) {
+    var v = FC[o.species] || FC.dfl2; name = p.name + ' ' + (SAWN[o.species] || SAWN.dfl2).name;
+    Fc = v[0]; Emin = v[1]; c = 0.8;
+    if (o.species !== 'syp2') cfac.push(['CF (size factor for Fc)', p.CF]); else if (p.d > 3.5) Fc = 1400;
+  } else { name = p.name + ' (typical PSL 1.8E column values)'; Fc = PSLC.Fc; Emin = Math.round(PSLC.E * 0.5184); c = 0.9; }
+  st.push({ h: 'Section (actual size ' + b + ' in × ' + d + ' in)', f: 'A = b·d; buckling uses the least dimension', s: 'A = ' + b + '·' + d, r: 'A = ' + r0(A, 2) + ' in², least dimension = ' + least + ' in' });
+  var P = (o.dead + o.live) * o.tribFt2 + (o.pointLb || 0);
+  st.push({ h: 'Load on the post', f: 'P = (dead + live) × tributary area + extra point load',
+    s: '(' + o.dead + ' + ' + o.live + ') psf × ' + r0(o.tribFt2, 1) + ' sq ft + ' + r0(o.pointLb || 0) + ' lb', r: 'P = ' + r0(P) + ' lb' });
+  var le = o.hIn, sr = le / least;
+  st.push({ h: 'Slenderness', f: 'le = Ke × unbraced height (Ke = 1.0, pinned top and bottom); le/d must be 50 or less',
+    s: 'le = 1.0 × ' + r0(le, 2) + ' in;  le/d = ' + r0(le, 2) + ' / ' + least, r: 'le/d = ' + r0(sr, 1), ok: sr <= 50 });
+  var Fcs = Fc * o.CD; cfac.forEach(function (f) { Fcs *= f[1]; });
+  st.push({ h: 'Compression value before buckling', f: 'Fc* = Fc × CD' + (cfac.length ? ' × CF' : ''),
+    s: Fc + ' × ' + o.CD + (cfac.length ? ' × ' + cfac[0][1] : ''), r: 'Fc* = ' + r0(Fcs) + ' psi' });
+  var FcE = 0.822 * Emin / (sr * sr), F = FcE / Fcs, q = (1 + F) / (2 * c), CP = q - Math.sqrt(q * q - F / c);
+  st.push({ h: 'Column stability factor', f: 'FcE = 0.822·Emin / (le/d)²;  CP = (1 + F)/(2c) − √[((1 + F)/(2c))² − F/c], F = FcE/Fc*, c = ' + c,
+    s: 'FcE = 0.822·' + r0(Emin) + ' / ' + r0(sr, 2) + '² = ' + r0(FcE) + ' psi;  F = ' + r0(F, 3), r: 'CP = ' + r0(CP, 3) });
+  var Fcp = Fcs * CP, Pa = Fcp * A, ratio = P / Pa;
+  st.push({ h: 'Allowable load and check', f: "Fc' = Fc* × CP;  P allow = Fc' × A", s: r0(Fcs) + ' × ' + r0(CP, 3) + ' = ' + r0(Fcp) + ' psi;  ' + r0(Fcp) + ' × ' + r0(A, 2),
+    r: 'P allow = ' + r0(Pa) + ' lb vs P = ' + r0(P) + ' lb → ' + r0(ratio * 100) + '% used', ok: ratio <= 1 && sr <= 50,
+    note: 'Axial load only. Bending from wind, eccentric loads, or a beam sitting off-center is not included.' });
+  var worst = sr > 50 ? ['Slenderness', sr / 50] : ['Compression', ratio];
+  return { name: name, steps: st, checks: [worst], worst: worst, pass: sr <= 50 && ratio <= 1, P: P, Pa: Pa, warn: [] };
+};
+
+/* longest span (inches, to 1 in) that passes every check */
+PT.maxSpan = function (o) {
+  var lo = 12, hi = 960, ok = function (L) { var x = PT.member(Object.assign({}, o, { spanIn: L })); return x && x.pass; };
+  if (!ok(lo)) return 0;
+  if (ok(hi)) return hi;
+  while (hi - lo > 1) { var mid = Math.floor((lo + hi) / 2); if (ok(mid)) lo = mid; else hi = mid; }
+  return lo;
+};
+})(typeof window !== 'undefined' ? window : globalThis);
 (function () {
 'use strict';
 var $ = function (s, r) { return (r || document).querySelector(s); };
@@ -695,10 +1424,11 @@ var NOTICE = [
   ['Estimates only. Not a quote or price guarantee.', 'Areas, quantities, prices, SKUs, descriptions, availability, and barcodes shown or printed by this app may be wrong or out of date and may not match a store or website. Nothing here is a price, a price match, an offer, an order, a promise, or an agreement. Only the retailer\'s own systems and written documents control price and availability.'],
   ['No reliance, even if an associate suggests it.', 'No store associate or other person is authorized to tell you to rely on this app or to accept its output as a measurement, quote, order, or guarantee. If someone pointed you here, that does not change this notice. Have a qualified installer or fabricator confirm every measurement before you order or cut anything.'],
   ['No responsibility.', 'To the fullest extent the law allows, the creator of this app, The Home Depot, and anyone connected to either are not responsible for any error, omission, loss, or damage of any kind (including the cost of materials, labor, delivery, or returns) that results from using or relying on this app or anything it prints or saves. You use it at your own risk. Where the law does not allow part of this, that part applies only as far as the law permits.'],
+  ['Not engineering. Have a professional check every number.', 'The load calculator, span and structural figures, material rules of thumb, and how-to guides are simplified general information for education only. They are not engineering, design, or professional advice, they are not a code approval, and they may be wrong or incomplete. Every number and method must be checked by a licensed engineer, architect, building official, or the product manufacturer, as appropriate, before anyone builds, buys, cuts, or loads anything. The creator of this app makes no claim that any of it is accurate and takes no responsibility for it.'],
   ['Your information.', 'What you type and the photos you pick stay in your browser. This app does not send them to anyone. Visualizer images are generic illustrations, not specific products, and will not match real finishes exactly.']
 ];
 var NOTICE_SHORT = 'Unofficial estimate tool. It is not made, endorsed, or approved by The Home Depot, and it is not a quote or a price guarantee. Prices, SKUs, quantities, and barcodes may be wrong, and no one is authorized to treat this output as binding, even if a store associate suggested it. Verify everything with the retailer and a qualified installer. Neither the app\'s creator, The Home Depot, nor anyone connected to either is responsible for inaccuracies.';
-var PDF_NOTICE = 'This estimate was produced by Pocket Takeoff, an independent app created by an individual on personal time. It is not part of, endorsed by, or approved by The Home Depot, Inc., which did not direct or review it. It is not a quote, an order, or a price guarantee, and it has no authority to bind any retailer, even if a store associate suggested using it. Quantities, prices, SKUs, descriptions, and barcodes may be inaccurate or out of date. Verify all measurements and prices with the retailer and a qualified installer before buying. Neither the app\'s creator, The Home Depot, nor anyone affiliated with either is responsible for inaccuracies or for any loss resulting from use of this estimate.';
+var PDF_NOTICE = 'This estimate was produced by Pocket Takeoff, an independent app created by an individual on personal time. It is not part of, endorsed by, or approved by The Home Depot, Inc., which did not direct or review it. It is not a quote, an order, or a price guarantee, and it has no authority to bind any retailer, even if a store associate suggested using it. Quantities, prices, SKUs, descriptions, and barcodes may be inaccurate or out of date. Verify all measurements and prices with the retailer and a qualified installer before buying. Structural and load figures are not engineering and must be checked by a licensed professional. Neither the app\'s creator, The Home Depot, nor anyone affiliated with either is responsible for inaccuracies or for any loss resulting from use of this estimate.';
 
 var KEY = 'pt-state-v1';
 function room(name, l, lin, w, win) { return { name: name, lft: l, lin: lin, wft: w, win: win }; }
@@ -714,7 +1444,14 @@ function defaults() {
       splash: [{ name: 'Example: backsplash', lenIn: 96, h: 0 }] },
     floor: { type: 'lvp', sku: '', desc: '', inStore: false, extra: '', waste: '10', cover: '20', tw: '12', th: '24', grout: '0.125', perBox: '',
       price: '', priceUnit: 'sqft', tax: '', notes: '',
-      rooms: [room('Example: bedroom', '12', '0', '11', '6'), room('Example: closet', '6', '0', '2', '6')] }
+      rooms: [room('Example: bedroom', '12', '0', '11', '6'), room('Example: closet', '6', '0', '2', '6')] },
+    drywall: { size: '4x8', thick: '1/2', type: 'regular', waste: '10', sub: true, doors: '1', doorSf: '20', windows: '1', winSf: '15', other: '',
+      corners: '2', cornerFt: '8', cornerIn: '0', bead: '8', mudRate: '9', mudPkg: '4.5', tapeRate: '370', tapeRoll: '500', screwRate: '1', price: '', tax: '', notes: '',
+      walls: [{ name: 'Example: bedroom walls', lft: '12', lin: '0', hft: '8', hin: '0', qty: '2' }, { name: 'Example: bedroom walls', lft: '11', lin: '6', hft: '8', hin: '0', qty: '2' }],
+      ceils: [{ name: 'Example: bedroom ceiling', lft: '12', lin: '0', wft: '11', win: '6' }] },
+    load: { kind: 'sawn', species: 'dfl2', nom: '10', plies: '1', lvlPly: '2', lvlD: '11.875', pslB: '3.5', pslD: '11.875', glB: '5.125', glD: '12',
+      ijD: '11.875', ijBf: '2.0625', ijTf: '1.375', mode: 'joist', spft: '14', spin: '0', spacing: '16', trib: '8', app: 'floor', dead: '10', live: '40', postSize: 's44', postFt: '8', postIn: '0', tribA: '40', pointLb: '',
+      CD: '1', liveLim: '360', totLim: '240', self: true }
   };
 }
 function merge(base, saved) {
@@ -1211,7 +1948,8 @@ A.counterReport = function () {
 (function () {
 'use strict';
 var A = APP, $ = A.$, N = A.N;
-var safe = function (s) { return String(s == null ? '' : s).replace(/[^\x20-\xFF]/g, '?'); };
+var TR = { '\u2074': '^4', '\u0394': 'Delta ', '\u22A5': ' perp', '\u2264': '<=', '\u2265': '>=', '\u2192': '->', '\u2212': '-', '\u2014': '-', '\u2013': '-', '\u2018': "'", '\u2019': "'", '\u201C': '"', '\u201D': '"', '\u2026': '...', '\u2248': '~', '\u221A': 'sqrt' };
+var safe = function (s) { return String(s == null ? '' : s).replace(/[\u2074\u0394\u22A5\u2264\u2265\u2192\u2212\u2014\u2013\u2018\u2019\u201C\u201D\u2026\u2248\u221A]/g, function (c) { return TR[c]; }).replace(/[^\n\x20-\xFF]/g, '?'); };
 var today = function () { return new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }); };
 var stamp = function () { var d = new Date(), p = function (n) { return (n < 10 ? '0' : '') + n; }; return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()); };
 
@@ -1234,9 +1972,10 @@ function renderPdf(rep) {
     doc.setFont('helvetica', 'bold'); doc.setFontSize(12); doc.setTextColor(10, 106, 133); doc.text(safe(sec.h), M, y + 4);
     doc.setDrawColor(190, 200, 196); doc.setLineWidth(0.3); doc.line(M, y + 6, M + CW, y + 6); y += 10;
     if (sec.rows) sec.rows.forEach(function (r) {
-      var lines = doc.splitTextToSize(safe(r[1]), CW - 66), h = Math.max(1, lines.length) * 4.8 + 1.6;
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+      var lines = doc.splitTextToSize(safe(r[1]), CW - 66), labs = doc.splitTextToSize(safe(r[0]), 62), h = Math.max(1, lines.length, labs.length) * 4.8 + 1.6;
       need(h);
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(90, 100, 106); doc.text(safe(r[0]), M, y + 4);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(90, 100, 106); doc.text(labs, M, y + 4);
       doc.setFont('helvetica', r[2] ? 'bold' : 'normal'); doc.setTextColor(22, 33, 42); doc.text(lines, M + 66, y + 4); y += h;
     });
     if (sec.note) {
@@ -1349,7 +2088,7 @@ async function copySummary(rep, btn) {
   ta.value = text; ta.focus(); ta.select(); A.toast('Copying is blocked here. The summary is selected below. Copy it manually.', 6000);
 }
 A.initOutputs = function () {
-  var map = { c: A.carpetReport, q: A.counterReport, f: A.floorReport };
+  var map = { c: A.carpetReport, q: A.counterReport, f: A.floorReport, d: A.drywallReport, l: A.loadReport };
   Object.keys(map).forEach(function (k) {
     $('#' + k + '-pdf').addEventListener('click', function () { savePdf(map[k]()); });
     $('#' + k + '-copy').addEventListener('click', function (e) { copySummary(map[k](), e.currentTarget); });
@@ -1576,10 +2315,275 @@ A.initVisualizers = function () {
 };
 })();
 (function () {
+'use strict';
+var A = APP, $ = A.$, esc = A.esc, S = A.S, N = A.N, fmt = PT.fmt;
+
+/* generic editable list. fields: [{f, lab, kind:'name'|'dim'|'num', ft, inch}] */
+function ListEditor(getList, host, addBtn, fields, blank, areaOf, onChange, noun) {
+  function dimf(id, f, v, lab, unit) {
+    return '<div class="uw"><input type="text" id="' + id + '" class="num" inputmode="decimal" aria-label="' + lab + '" data-f="' + f + '" value="' + esc(v) + '"><span>' + unit + '</span></div>';
+  }
+  function render() {
+    var L = getList();
+    host.innerHTML = L.map(function (r, i) {
+      var id = host.id + '-' + i, nm = fields[0];
+      var h = '<div class="room" data-i="' + i + '"><div class="room-top"><div class="grow"><label for="' + id + '-n">' + nm.lab + '</label><input type="text" id="' + id + '-n" data-f="' + nm.f + '" value="' + esc(r[nm.f]) + '" placeholder="' + nm.lab + '" autocomplete="off"></div>' +
+        '<button type="button" class="btn danger small" data-act="rm" aria-label="Remove ' + esc(r[nm.f] || noun) + '">Remove</button></div><div class="row">';
+      fields.slice(1).forEach(function (fd) {
+        if (fd.kind === 'dim') h += '<div><span class="lbl">' + fd.lab + '</span><div class="dim">' + dimf(id + '-' + fd.ft, fd.ft, r[fd.ft], fd.lab + ' feet', 'ft') + dimf(id + '-' + fd.inch, fd.inch, r[fd.inch], fd.lab + ' inches', 'in') + '</div></div>';
+        else h += '<div><label for="' + id + '-' + fd.f + '">' + fd.lab + '</label><input type="text" id="' + id + '-' + fd.f + '" class="num" inputmode="numeric" data-f="' + fd.f + '" value="' + esc(r[fd.f]) + '"></div>';
+      });
+      return h + '</div><div class="room-area"><span>Area</span><b>' + fmt(areaOf(r)) + ' sq ft</b></div></div>';
+    }).join('') || '<p class="help">None yet. Add one below.</p>';
+  }
+  host.addEventListener('input', function (e) {
+    var t = e.target, row = t.closest('[data-i]'); if (!row || !t.dataset.f) return;
+    var r = getList()[+row.dataset.i]; r[t.dataset.f] = t.value;
+    row.querySelector('.room-area b').textContent = fmt(areaOf(r)) + ' sq ft'; onChange();
+  });
+  host.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act="rm"]'); if (!b) return;
+    getList().splice(+b.closest('[data-i]').dataset.i, 1); render(); onChange();
+  });
+  addBtn.addEventListener('click', function () {
+    getList().push(blank()); render(); onChange();
+    var rows = host.querySelectorAll('.room'), last = rows[rows.length - 1]; if (last) last.querySelector('input').focus();
+  });
+  return { render: render };
+}
+A.ListEditor = ListEditor;
+
+var wallArea = function (w) { return PT.inches(w.lft, w.lin) * PT.inches(w.hft, w.hin) / 144 * Math.max(1, Math.round(N(w.qty) || 1)); };
+var ceilArea = function (c) { return PT.inches(c.lft, c.lin) * PT.inches(c.wft, c.win) / 144; };
+var SIZE = { '4x8': '4 ft × 8 ft', '4x9': '4 ft × 9 ft', '4x10': '4 ft × 10 ft', '4x12': '4 ft × 12 ft', '54x12': '54 in × 12 ft' };
+var TYPE = { regular: 'Regular', light: 'Lightweight', mr: 'Moisture and mold resistant', x: 'Fire-rated (Type X)', abuse: 'Abuse or impact resistant' };
+
+function model() {
+  var d = S.drywall;
+  var walls = d.walls.map(function (w) { return { name: w.name, lenIn: PT.inches(w.lft, w.lin), hIn: PT.inches(w.hft, w.hin), qty: N(w.qty) || 1 }; });
+  var ceils = d.ceils.map(function (c) { return { name: c.name, lenIn: PT.inches(c.lft, c.lin), widIn: PT.inches(c.wft, c.win) }; });
+  var o = { walls: walls, ceils: ceils, subtract: !!d.sub, doors: N(d.doors), doorFt2: N(d.doorSf), windows: N(d.windows), winFt2: N(d.winSf), otherFt2: N(d.other),
+    size: d.size, waste: N(d.waste), tapeRate: N(d.tapeRate), mudRate: N(d.mudRate), screwRate: N(d.screwRate), screwLbRate: 4,
+    tapeRoll: N(d.tapeRoll), mudPkg: N(d.mudPkg), corners: N(d.corners), cornerHIn: PT.inches(d.cornerFt, d.cornerIn), beadFt: N(d.bead),
+    price: N(d.price), taxPct: N(d.tax) };
+  var x = PT.drywall(o);
+  var qty = [['Sheet', SIZE[d.size] + ', ' + d.thick + ' in, ' + TYPE[d.type]], ['Wall area', fmt(x.wallFt2) + ' sq ft'], ['Ceiling area', fmt(x.ceilFt2) + ' sq ft']];
+  if (x.subFt2 > 0) qty.push(['Openings subtracted', '−' + fmt(x.subFt2) + ' sq ft']);
+  qty.push(['Net area', fmt(x.net) + ' sq ft'], ['Waste', fmt(o.waste, 1) + '%'], ['Sheets (rounded up)', fmt(x.sheets, 0), 'total'], ['Board area bought', fmt(x.board) + ' sq ft']);
+  var fin = [];
+  fin.push(['Paper joint tape', fmt(x.tapeFt, 0) + ' ft' + (x.tapeRolls != null ? ' = ' + x.tapeRolls + ' roll' + (x.tapeRolls === 1 ? '' : 's') + ' of ' + o.tapeRoll + ' ft' : '')]);
+  fin.push(['Joint compound', fmt(x.mudGal, 1) + ' gal' + (x.mudPkgs != null ? ' = ' + x.mudPkgs + ' × ' + o.mudPkg + ' gal' : '')]);
+  fin.push(['Screws', 'about ' + fmt(x.screws, 0) + ' (about ' + fmt(Math.max(1, Math.ceil(x.screwLb)), 0) + ' lb of 1 1/4 in coarse thread for 1/2 in board on wood)']);
+  if (x.beadPcs) fin.push(['Corner bead', x.beadPcs + ' piece' + (x.beadPcs === 1 ? '' : 's') + ' of ' + o.beadFt + ' ft']);
+  var cost = [];
+  if (o.price > 0) {
+    cost.push(['Drywall (' + PT.money(o.price) + ' per sheet)', PT.money(x.material)]);
+    if (o.taxPct > 0) cost.push(['Sales tax (' + fmt(o.taxPct, 2) + '%)', PT.money(x.tax)]);
+    cost.push(['Estimated total, sheets only', PT.money(x.total), 'total']);
+  }
+  return { x: x, o: o, walls: walls, ceils: ceils, qty: qty, fin: fin, cost: cost };
+}
+function render() {
+  var m = model();
+  A.readout($('#d-ro'), fmt(m.x.sheets, 0), 'sheets to buy (rounded up)', m.qty.concat(['hr'], m.fin, m.cost.length ? ['hr'] : [], m.cost));
+}
+A.drywallReport = function () {
+  var d = S.drywall, m = model(), sec = [];
+  var wr = m.walls.filter(function (w) { return w.lenIn > 0 && w.hIn > 0; }).map(function (w) { return [w.name || 'Wall', PT.fmtLen(w.lenIn) + ' x ' + PT.fmtLen(w.hIn), String(Math.round(w.qty)), fmt(w.lenIn * w.hIn / 144 * Math.round(w.qty))]; });
+  if (wr.length) sec.push({ h: 'Walls', table: { cols: ['Wall', 'Length x height', 'Count', 'Sq ft'], w: [62, 62, 22, 40], rows: wr } });
+  var cr = m.ceils.filter(function (c) { return c.lenIn > 0 && c.widIn > 0; }).map(function (c) { return [c.name || 'Ceiling', PT.fmtLen(c.lenIn) + ' x ' + PT.fmtLen(c.widIn), fmt(c.lenIn * c.widIn / 144)]; });
+  if (cr.length) sec.push({ h: 'Ceilings', table: { cols: ['Ceiling', 'Size', 'Sq ft'], w: [70, 75, 41], rows: cr } });
+  sec.push({ h: 'Quantities', rows: m.qty });
+  sec.push({ h: 'Finishing materials (estimates)', rows: m.fin });
+  sec.push({ h: 'How these were estimated', note: 'Tape: ' + m.o.tapeRate + ' ft per 1,000 sq ft of board. Compound: ' + m.o.mudRate + ' gal per 1,000 sq ft. Screws: ' + m.o.screwRate + ' per sq ft. These are rules of thumb. Actual use depends on the product, the finish level, and the installer. Fire-rated assemblies need the screw type and spacing listed for that assembly.' });
+  if (m.cost.length) sec.push({ h: 'Estimated cost', rows: m.cost });
+  if (d.notes.trim()) sec.push({ h: 'Notes', note: d.notes.trim() });
+  return { title: 'Drywall estimate', file: 'drywall-estimate', sections: sec };
+};
+
+A.R.drywall = render;
+A.initDrywall = function () {
+  var on = function () { A.persist(); render(); };
+  var wl = ListEditor(function () { return S.drywall.walls; }, $('#d-walls'), $('#d-wadd'),
+    [{ f: 'name', lab: 'Wall name' }, { kind: 'dim', lab: 'Length', ft: 'lft', inch: 'lin' }, { kind: 'dim', lab: 'Height', ft: 'hft', inch: 'hin' }, { f: 'qty', lab: 'Count' }],
+    function () { return { name: '', lft: '', lin: '', hft: '8', hin: '0', qty: '1' }; }, wallArea, on, 'wall');
+  var cl = ListEditor(function () { return S.drywall.ceils; }, $('#d-ceils'), $('#d-cadd'),
+    [{ f: 'name', lab: 'Ceiling name' }, { kind: 'dim', lab: 'Length', ft: 'lft', inch: 'lin' }, { kind: 'dim', lab: 'Width', ft: 'wft', inch: 'win' }],
+    function () { return { name: '', lft: '', lin: '', wft: '', win: '' }; }, ceilArea, on, 'ceiling');
+  $('#d-reset').addEventListener('click', function () {
+    S.drywall.walls = [{ name: '', lft: '', lin: '', hft: '8', hin: '0', qty: '1' }]; S.drywall.ceils = [];
+    ['notes', 'price', 'corners', 'other'].forEach(function (k) { S.drywall[k] = ''; });
+    A.$$bind('drywall'); wl.render(); cl.render(); on(); A.toast('Cleared. Ready for your own numbers.');
+  });
+  wl.render(); cl.render(); render();
+};
+})();
+(function () {
+'use strict';
+var A = APP, $ = A.$, esc = A.esc, S = A.S, N = A.N, fmt = PT.fmt;
+var tile = function (k, v) { return '<div class="tile"><div class="k">' + esc(k) + '</div><div class="v">' + esc(v) + '</div></div>'; };
+var numFmt = function (v) { return Math.abs(v) >= 1e12 || (Math.abs(v) < 1e-6 && v !== 0) ? v.toExponential(6) : String(+v.toPrecision(12)); };
+
+/* ---------- standard calculator ---------- */
+function initCalc() {
+  var disp = $('#k-disp'), sub = $('#k-sub'), justDone = false;
+  function preview() {
+    try { var v = PT.calc(disp.value); sub.textContent = disp.value.trim() ? '= ' + numFmt(v) : ''; } catch (e) { sub.textContent = ''; }
+  }
+  function press(k) {
+    if (k === 'C') { disp.value = ''; sub.textContent = ''; return; }
+    if (k === 'back') { disp.value = disp.value.slice(0, -1); preview(); return; }
+    if (k === '=') {
+      try { var v = PT.calc(disp.value); sub.textContent = disp.value + ' ='; disp.value = numFmt(v); justDone = true; }
+      catch (e) { sub.textContent = e.message === 'div0' ? 'Cannot divide by zero' : 'Check the expression'; }
+      return;
+    }
+    if (justDone && /[0-9.(]/.test(k)) disp.value = '';
+    justDone = false; disp.value += k; preview();
+  }
+  $('#k-keys').addEventListener('click', function (e) { var b = e.target.closest('[data-k]'); if (b) press(b.dataset.k); });
+  document.querySelector('[data-k2]').addEventListener('click', function () { press(')'); });
+  disp.addEventListener('input', function () { justDone = false; preview(); });
+  disp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); press('='); } });
+}
+
+/* ---------- construction calculator ---------- */
+function lenTiles(inch) {
+  return tile('Feet and inches', PT.fmtLen16(inch)) + tile('Decimal feet', fmt(inch / 12, 4) + ' ft') + tile('Decimal inches', fmt(inch, 4) + ' in') + tile('Metric', fmt(inch * 25.4, 1) + ' mm');
+}
+function runCons() {
+  var op = $('#cc-op').value, a = PT.parseLen($('#cc-a').value), bRaw = $('#cc-b').value, out = $('#cc-out');
+  var lenB = op === '+' || op === '-' || op === 'area';
+  $('#cc-bl').textContent = lenB ? 'Second length' : op === 'split' ? 'Number of equal parts' : 'Number';
+  var b = lenB ? PT.parseLen(bRaw) : parseFloat(String(bRaw).replace(',', '.'));
+  if (!isFinite(a) || !isFinite(b)) { out.innerHTML = '<p class="err">Check the lengths. Try a format like 12\' 6 3/8".</p>'; return; }
+  if ((op === '/' || op === 'split') && !b) { out.innerHTML = '<p class="err">Enter a number other than zero.</p>'; return; }
+  if (op === 'area') { var sf = a * b / 144; out.innerHTML = tile('Square feet', fmt(sf, 3)) + tile('Square inches', fmt(a * b, 2)) + tile('Square yards', fmt(sf / 9, 3)) + tile('Square meters', fmt(a * b * 0.00064516, 3)); return; }
+  if (op === 'split') { var n = Math.round(b), part = a / n; out.innerHTML = lenTiles(part) + '<p class="help" style="grid-column:1/-1">Each part. Marks fall at ' + Array.from({ length: Math.min(n - 1, 12) }, function (_, i) { return PT.fmtLen16(part * (i + 1)); }).join(', ') + (n - 1 > 12 ? ', …' : '') + '. This ignores saw kerf.</p>'; return; }
+  var r = op === '+' ? a + b : op === '-' ? a - b : op === '*' ? a * b : a / b;
+  out.innerHTML = lenTiles(r);
+}
+function runTri() {
+  var run = PT.parseLen($('#rt-run').value), riseS = $('#rt-rise').value.trim(), pitch = parseFloat($('#rt-pitch').value), out = $('#rt-out');
+  var rise = riseS ? PT.parseLen(riseS) : (isFinite(pitch) ? run * pitch / 12 : NaN);
+  if (!(run > 0) || !(rise >= 0)) { out.innerHTML = '<p class="err">Enter a run and either a rise or a pitch.</p>'; return; }
+  var len = Math.hypot(run, rise), ang = Math.atan2(rise, run) * 180 / Math.PI;
+  out.innerHTML = tile('Rise', PT.fmtLen16(rise)) + tile('Length along slope', PT.fmtLen16(len)) + tile('Pitch', fmt(rise / run * 12, 2) + ' in 12') + tile('Angle', fmt(ang, 2) + '°');
+}
+
+/* ---------- load calculator ---------- */
+var PRE = { floor: [10, 40, '360', '240', '1'], roof: [15, 35, '240', '180', '1.15'], ceiling: [5, 10, '240', '240', '1'], post: [10, 40, null, null, '1'] };
+var HELP = {
+  floor: 'Starting values: 40 psf live (living areas and decks; 30 psf is allowed for sleeping rooms in many codes) and 10 psf dead (framing, subfloor, finishes). Add dead load for tile, stone, or heavy finishes.',
+  roof: 'Starting values: 35 psf live or snow and 15 psf dead (framing, sheathing, shingles). Snow loads vary a lot by location, so use the value your building department gives. Enter the span measured level (horizontal), not along the slope.',
+  ceiling: 'Starting values: 10 psf live and 5 psf dead for an attic with no storage. Use 20 psf live and 10 psf dead for an attic with limited storage, or treat a usable attic room as a floor.',
+  post: 'Enter the total load per square foot the post carries. Starting values match a floor: 40 psf live and 10 psf dead. Add roof or second-floor loads through the area or the extra point load.'
+};
+function loadInput() {
+  var l = S.load, o = { kind: l.kind, mode: l.mode, spanIn: PT.inches(l.spft, l.spin), spacingIn: N(l.spacing), tribFt: N(l.trib), dead: N(l.dead), live: N(l.live),
+    CD: N(l.CD) || 1, liveLim: N(l.liveLim) || 360, totLim: N(l.totLim) || 240, selfWeight: !!l.self };
+  if (l.kind === 'sawn') { o.species = l.species; o.nom = +l.nom; o.plies = +l.plies; }
+  else if (l.kind === 'lvl19' || l.kind === 'lvl20') { o.b = 1.75 * (+l.lvlPly); o.d = +l.lvlD; }
+  else if (l.kind === 'psl') { o.b = +l.pslB; o.d = +l.pslD; }
+  else if (l.kind === 'glulam') { o.b = +l.glB; o.d = +l.glD; }
+  else if (l.kind === 'ijoist') { o.d = +l.ijD; o.bf = +l.ijBf; o.tf = +l.ijTf; }
+  if (l.app === 'post') o = { post: true, size: l.postSize, species: l.species, hIn: PT.inches(l.postFt, l.postIn), CD: N(l.CD) || 1, tribFt2: N(l.tribA), dead: N(l.dead), live: N(l.live), pointLb: N(l.pointLb) };
+  return o;
+}
+var lastRes = null;
+function stepsHtml(x) {
+  return '<ol class="steps">' + x.steps.map(function (s, i) {
+    var cls = s.ok === undefined ? '' : s.ok ? ' class="ok"' : ' class="bad"';
+    return '<li' + cls + '><div class="h">' + (i + 1) + '. ' + esc(s.h) + (s.ok === undefined ? '' : '<span class="tag ' + (s.ok ? 'ok">OK' : 'bad">Too high') + '</span>') + '</div>' +
+      '<code>' + esc(s.f) + '</code>' + (s.s ? '<code>' + esc(s.s) + '</code>' : '') + '<div class="r">' + esc(s.r) + '</div>' + (s.note ? '<div class="n">' + esc(s.note) + '</div>' : '') + '</li>';
+  }).join('') + '</ol>';
+}
+function renderLoad() {
+  var l = S.load, k = l.kind, post = l.app === 'post', truss = !post && k === 'truss';
+  ['#l-species', '#l-pspecies'].forEach(function (s) { var e = $(s); if (e && e.value !== l.species) e.value = l.species; });
+  $('#lg-kind').hidden = post; $('#lg-mode').hidden = post; $('#lg-post').hidden = !post;
+  $('#lg-pspecies').hidden = !(post && /^s/.test(l.postSize));
+  $('#lg-sawn').hidden = post || k !== 'sawn'; $('#lg-lvl').hidden = post || !(k === 'lvl19' || k === 'lvl20'); $('#lg-psl').hidden = post || k !== 'psl';
+  $('#lg-gl').hidden = post || k !== 'glulam'; $('#lg-ij').hidden = post || k !== 'ijoist'; $('#lg-truss').hidden = !truss;
+  $('#lg-load').hidden = truss; $('#l-btns').hidden = truss;
+  var beam = l.mode === 'beam';
+  $('#lg-span').hidden = post; $('#lg-spacing').hidden = beam; $('#lg-trib').hidden = !beam; $('#l-tribhelp').hidden = post || !beam;
+  $('#lg-self').hidden = post || !beam; $('#lg-ll').hidden = post; $('#lg-tl').hidden = post;
+  $('#l-loadhelp').textContent = HELP[l.app] || '';
+  var out = $('#l-out');
+  if (truss) { out.innerHTML = ''; lastRes = null; return; }
+  var o = loadInput(), x, h;
+  if (post) {
+    if (!(o.hIn > 0)) { out.innerHTML = '<p class="err">Enter the post height.</p>'; lastRes = null; return; }
+    x = PT.post(o); if (!x) { out.innerHTML = '<p class="err">Check the inputs.</p>'; lastRes = null; return; }
+    lastRes = { o: o, x: x, post: true };
+    h = '<div class="verdict ' + (x.pass ? 'ok' : 'bad') + '" style="margin-top:14px">' + (x.pass ? 'Passes this simplified check. ' : 'Does not pass. ') +
+      'Allowable load about ' + fmt(x.Pa, 0) + ' lb; load entered ' + fmt(x.P, 0) + ' lb. A professional must still check it.</div>';
+    h += '<p class="help" style="margin-top:10px">' + esc(x.name) + ', ' + PT.fmtLen(o.hIn) + ' unbraced.</p>' + stepsHtml(x);
+    h += '<p class="help">Not checked: the beam bearing on top of the post, the connection hardware, the footing and soil below, bending, and uplift.</p>';
+    out.innerHTML = h; return;
+  }
+  if (!(o.spanIn > 0)) { out.innerHTML = '<p class="err">Enter the clear span.</p>'; lastRes = null; return; }
+  if (beam && !(o.tribFt > 0)) { out.innerHTML = '<p class="err">Enter the tributary width.</p>'; lastRes = null; return; }
+  x = PT.member(o); if (!x) { out.innerHTML = '<p class="err">Check the inputs.</p>'; lastRes = null; return; }
+  var mx = PT.maxSpan(o); lastRes = { o: o, x: x, mx: mx };
+  h = '<div class="verdict ' + (x.pass ? 'ok' : 'bad') + '" style="margin-top:14px">' +
+    (x.pass ? 'Passes these simplified checks at ' + PT.fmtLen(o.spanIn) + '.' : 'Does not pass at ' + PT.fmtLen(o.spanIn) + '. ' + x.worst[0] + ' is at ' + fmt(x.worst[1] * 100, 0) + '%.') +
+    ' Longest span passing these checks: about ' + (mx ? PT.fmtLen(mx) : 'none') + '. A professional must still check it.</div>';
+  h += '<p class="help" style="margin-top:10px">' + esc(x.name) + '. Highest use: ' + esc(x.worst[0].toLowerCase()) + ' at ' + fmt(x.worst[1] * 100, 0) + '%.</p>' + stepsHtml(x);
+  if (x.warn.length) h += '<p class="help">' + x.warn.map(esc).join(' ') + '</p>';
+  out.innerHTML = h;
+}
+A.loadReport = function () {
+  if (!lastRes) renderLoad();
+  var r = lastRes, sec = [];
+  sec.push({ h: 'NOT ENGINEERING', note: 'Educational estimate only. Not engineering, design, or professional advice, and not a code approval. The method is simplified and the material values are generic. Every number must be checked by a licensed engineer, architect, building official, or the product manufacturer before anyone builds, buys, cuts, or loads anything. The creator of this app takes no responsibility for its accuracy.' });
+  if (!r) { sec.push({ h: 'Inputs', note: S.load.kind === 'truss' ? 'Trusses are not calculated. Use the sealed truss design drawing.' : 'Inputs are incomplete.' }); return { title: 'Load check (educational)', file: 'load-check', sections: sec }; }
+  var o = r.o, x = r.x;
+  if (r.post) {
+    sec.push({ h: 'Inputs', rows: [['Post', x.name], ['Unbraced height', PT.fmtLen(o.hIn)], ['Loads', o.dead + ' psf dead + ' + o.live + ' psf live or snow over ' + fmt(o.tribFt2, 1) + ' sq ft' + (o.pointLb ? ' + ' + fmt(o.pointLb, 0) + ' lb point load' : '')], ['Load duration CD', String(o.CD)]] });
+    sec.push({ h: 'Result', rows: [['Simplified check', x.pass ? 'Passes' : 'Does not pass', 'total'], ['Load', fmt(x.P, 0) + ' lb'], ['Allowable load', 'about ' + fmt(x.Pa, 0) + ' lb']] });
+  } else {
+  var inp = [['Member', x.name], ['Holds up', S.load.app], ['Used as', o.mode === 'beam' ? 'Beam or header, tributary width ' + fmt(o.tribFt, 2) + ' ft' : 'Joists or rafters at ' + o.spacingIn + ' in on center'],
+    ['Clear span', PT.fmtLen(o.spanIn)], ['Loads', o.dead + ' psf dead + ' + o.live + ' psf live or snow' + (o.mode === 'beam' && o.selfWeight ? ' + self-weight' : '')],
+    ['Load duration CD', String(o.CD)], ['Deflection limits', 'Live L/' + o.liveLim + ', total L/' + o.totLim]];
+  sec.push({ h: 'Inputs', rows: inp });
+  sec.push({ h: 'Result', rows: [['Simplified checks', x.pass ? 'Pass at this span' : 'Do not pass at this span', 'total'], ['Highest use', x.worst[0] + ' at ' + fmt(x.worst[1] * 100, 0) + '%'], ['Longest passing span', r.mx ? 'about ' + PT.fmtLen(r.mx) : 'none']] });
+  }
+  sec.push({ h: 'The math, step by step', rows: x.steps.map(function (s, i) {
+    return [(i + 1) + '. ' + s.h.replace(/\s*\(.*\)$/, ''), [s.f, s.s, s.r + (s.ok === undefined ? '' : s.ok ? '  [OK]' : '  [TOO HIGH]'), s.note || ''].filter(Boolean).join('\n')];
+  }) });
+  sec.push({ h: 'Not checked', note: r.post ? 'The beam bearing on top of the post, connection hardware, footing and soil, bending from wind or eccentric load, and uplift.' : 'Point loads, cantilevers, continuous spans, notches and holes, lateral bracing, connections and hangers, posts, walls and footings below, vibration, wet service, fire rating, and local code requirements.' + (x.warn.length ? ' ' + x.warn.join(' ') : '') });
+  return { title: 'Load check (educational)', file: 'load-check', sections: sec };
+};
+
+A.R.load = renderLoad;
+A.initResources = function () {
+  initCalc();
+  ['cc-a', 'cc-b'].forEach(function (id) { $('#' + id).addEventListener('input', runCons); });
+  $('#cc-op').addEventListener('change', function () {
+    var op = $('#cc-op').value, b = $('#cc-b');
+    if ((op === '*' || op === '/') && !/^\s*\d*\.?\d+\s*$/.test(b.value)) b.value = '2';
+    if (op === 'split' && !/^\s*\d+\s*$/.test(b.value)) b.value = '3';
+    if ((op === '+' || op === '-' || op === 'area') && /^\s*\d*\.?\d+\s*$/.test(b.value)) b.value = '3\' 2 1/4"';
+    runCons();
+  });
+  $('#rt-rise').addEventListener('input', function () { if ($('#rt-rise').value.trim()) $('#rt-pitch').value = ''; runTri(); });
+  $('#rt-pitch').addEventListener('input', function () { if ($('#rt-pitch').value.trim()) $('#rt-rise').value = ''; runTri(); });
+  $('#rt-run').addEventListener('input', runTri);
+  $('#l-app').addEventListener('change', function () {
+    var p = PRE[S.load.app]; if (!p) return;
+    S.load.dead = String(p[0]); S.load.live = String(p[1]); if (p[2]) { S.load.liveLim = p[2]; S.load.totLim = p[3]; } S.load.CD = p[4];
+    A.$$bind('load'); A.persist(); renderLoad();
+  });
+  runCons(); runTri(); renderLoad();
+};
+})();
+(function () {
   var A = APP;
   var hl=document.getElementById('hdr-logo'), gl=document.getElementById('gate-logo'); if (hl && gl) gl.src = hl.src;
   A.initGate(); A.initNotices(); A.initTabs(); A.bindAll();
-  A.initRooms(); A.initCounter(); A.initOutputs(); A.initVisualizers();
+  A.initRooms(); A.initCounter(); A.initOutputs(); A.initVisualizers(); A.initDrywall(); A.initResources();
 })();
 
 </script>
